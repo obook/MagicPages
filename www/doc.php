@@ -1,17 +1,19 @@
 <?php
 /**
- * Documentation page — renders a project's .md file as HTML.
+ * Nom : doc.php
+ * Description : Affichage de la documentation Markdown d'une application.
+ * Auteur : O. Booklage
+ * Date : Avril 2026
+ * Licence : MIT
  */
 
 require_once __DIR__ . '/parsedown.php';
 
-// ── Configuration ──────────────────────────────────────────────
 $appsDir = __DIR__ . '/apps';
-// ───────────────────────────────────────────────────────────────
 
 $project = $_GET['project'] ?? '';
 
-// Sanitize: only allow simple directory names
+/* Valider le nom du projet : seuls les caractères simples sont autorisés */
 if (!preg_match('/^[a-zA-Z0-9._-]+$/', $project)) {
     http_response_code(400);
     exit('Projet invalide.');
@@ -42,12 +44,7 @@ $htmlContent = $parsedown->text($mdContent);
     <title><?= htmlspecialchars($project) ?> — Grimoire</title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
-    <script>
-        (function() {
-            var t = localStorage.getItem('theme');
-            if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
-        })();
-    </script>
+    <script src="theme-init.js"></script>
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/cosmos.css">
     <link rel="stylesheet" href="css/chrome.css">
@@ -55,8 +52,11 @@ $htmlContent = $parsedown->text($mdContent);
     <link rel="stylesheet" href="css/doc.css">
 </head>
 <body>
-    <!-- ── Mystic SVG Background (light version) ── -->
-    <svg class="bg-cosmos" viewBox="0 0 1000 1000" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <!-- ── Arrière-plan SVG animé ── -->
+    <svg class="bg-cosmos"
+         viewBox="0 0 1000 1000"
+         aria-hidden="true"
+         preserveAspectRatio="xMidYMid slice">
         <defs>
             <radialGradient id="nebula1" cx="25%" cy="35%" r="40%">
                 <stop offset="0%" stop-color="#2a1050" stop-opacity="0.4"/>
