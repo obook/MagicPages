@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 300 300"
+   width="300"
+   height="300"
+   version="1.1"
+   id="svg36"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs40" />
+  <sodipodi:namedview
+     id="namedview38"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="2.4766667"
+     inkscape:cx="150"
+     inkscape:cy="150"
+     inkscape:window-width="1920"
+     inkscape:window-height="1000"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg36" />
+  <!-- Tête de souris centrée -->
+  <g
+     transform="matrix(3.3706689,0,0,3.5967723,71.699077,130.39976)"
+     id="g34">
+    <!-- Oreille gauche (arrière) -->
+    <ellipse
+       cx="-4"
+       cy="-4"
+       rx="16"
+       ry="22"
+       fill="#f4a5c0"
+       transform="rotate(-25,-4,-4)"
+       id="ellipse2" />
+    <ellipse
+       cx="-4"
+       cy="-2"
+       rx="10"
+       ry="14"
+       fill="#f7749e"
+       transform="rotate(-25,-4,-2)"
+       id="ellipse4" />
+    <!-- Oreille droite (avant) -->
+    <ellipse
+       cx="14"
+       cy="-16"
+       rx="15"
+       ry="20"
+       fill="#f4a5c0"
+       transform="rotate(10,14,-16)"
+       id="ellipse6" />
+    <ellipse
+       cx="14"
+       cy="-14"
+       rx="9"
+       ry="13"
+       fill="#f7749e"
+       transform="rotate(10,14,-14)"
+       id="ellipse8" />
+    <!-- Forme de la tête -->
+    <ellipse
+       cx="12"
+       cy="22"
+       rx="27"
+       ry="25"
+       fill="#f4a5c0"
+       id="ellipse10" />
+    <!-- Museau pointu -->
+    <ellipse
+       cx="36"
+       cy="27"
+       rx="14"
+       ry="10"
+       fill="#fddfeb"
+       id="ellipse12" />
+    <!-- Nez -->
+    <circle
+       cx="47"
+       cy="24"
+       r="4.5"
+       fill="#d4567a"
+       id="circle14" />
+    <!-- Œil expressif -->
+    <ellipse
+       cx="20"
+       cy="16"
+       rx="7.5"
+       ry="8.5"
+       fill="#ffffff"
+       id="ellipse16" />
+    <circle
+       cx="23"
+       cy="15"
+       r="4.5"
+       fill="#2d2d2d"
+       id="circle18" />
+    <circle
+       cx="25"
+       cy="13"
+       r="1.8"
+       fill="#ffffff"
+       id="circle20" />
+    <!-- Sourcil joyeux -->
+    <path
+       d="M 14,6 Q 20,1 27,6"
+       fill="none"
+       stroke="#d4567a"
+       stroke-width="1.8"
+       stroke-linecap="round"
+       id="path22" />
+    <!-- Grand sourire -->
+    <path
+       d="m 34,32 q 8,10 14,2"
+       fill="none"
+       stroke="#d4567a"
+       stroke-width="2"
+       stroke-linecap="round"
+       id="path24" />
+    <!-- Joue rosée -->
+    <circle
+       cx="28"
+       cy="30"
+       r="5"
+       fill="#f0839f"
+       opacity="0.4"
+       id="circle26" />
+    <!-- Moustaches fines -->
+    <line
+       x1="43"
+       y1="20"
+       x2="65"
+       y2="16"
+       stroke="#d4567a"
+       stroke-width="1.3"
+       stroke-linecap="round"
+       id="line28" />
+    <line
+       x1="44"
+       y1="25"
+       x2="67"
+       y2="25"
+       stroke="#d4567a"
+       stroke-width="1.3"
+       stroke-linecap="round"
+       id="line30" />
+    <line
+       x1="43"
+       y1="30"
+       x2="63"
+       y2="36"
+       stroke="#d4567a"
+       stroke-width="1.3"
+       stroke-linecap="round"
+       id="line32" />
+  </g>
+</svg>

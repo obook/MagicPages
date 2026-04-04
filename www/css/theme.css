@@ -1,0 +1,77 @@
+/* ── Reset ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── Dark theme — Midnight Grimoire ── */
+:root {
+    --bg-deep: #06060f;
+    --bg-surface: #0c0c1a;
+    --bg-card: #111125;
+    --bg-hover: #1a1a38;
+    --border: #252545;
+    --border-accent: #3a3a6a;
+    --text-primary: #e8e2f4;
+    --text-secondary: #9e96b8;
+    --text-muted: #5e5880;
+    --gold: #d4a844;
+    --gold-dim: rgba(212, 168, 68, 0.12);
+    --gold-border: rgba(212, 168, 68, 0.30);
+    --gold-glow: rgba(212, 168, 68, 0.08);
+    --violet: #8b5cf6;
+    --violet-dim: rgba(139, 92, 246, 0.10);
+    --violet-border: rgba(139, 92, 246, 0.25);
+    --violet-glow: rgba(139, 92, 246, 0.06);
+    --emerald: #34d399;
+    --emerald-dim: rgba(52, 211, 153, 0.08);
+    --emerald-border: rgba(52, 211, 153, 0.20);
+    --crimson: #e85d5d;
+    --crimson-glow: rgba(232, 93, 93, 0.10);
+    --card-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+    --glow-color: rgba(139, 92, 246, 0.08);
+    --star-opacity: 1;
+    --noise-opacity: 0.03;
+    --sigil-opacity: 0.035;
+}
+
+/* ── Light theme — Vieux Grimoire Sépia ── */
+[data-theme="light"] {
+    --bg-deep: #1e1812;
+    --bg-surface: #28211a;
+    --bg-card: #2e261e;
+    --bg-hover: #382f25;
+    --border: #4a3e30;
+    --border-accent: #5e4e3a;
+    --text-primary: #e8dcc8;
+    --text-secondary: #b8a88a;
+    --text-muted: #7a6a52;
+    --gold: #c9952a;
+    --gold-dim: rgba(201, 149, 42, 0.14);
+    --gold-border: rgba(201, 149, 42, 0.35);
+    --gold-glow: rgba(201, 149, 42, 0.10);
+    --violet: #a87edf;
+    --violet-dim: rgba(168, 126, 223, 0.10);
+    --violet-border: rgba(168, 126, 223, 0.25);
+    --violet-glow: rgba(168, 126, 223, 0.06);
+    --emerald: #5cc08a;
+    --emerald-dim: rgba(92, 192, 138, 0.08);
+    --emerald-border: rgba(92, 192, 138, 0.20);
+    --crimson: #d45050;
+    --crimson-glow: rgba(212, 80, 80, 0.10);
+    --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    --glow-color: rgba(201, 149, 42, 0.08);
+    --star-opacity: 0.7;
+    --noise-opacity: 0.04;
+    --sigil-opacity: 0.03;
+}
+
+/* ── Base ── */
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Crimson Pro', 'Bitter', serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.65;
+    overflow-x: hidden;
+    position: relative;
+}
