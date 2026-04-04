@@ -22,3 +22,6 @@ jobs:
           local-dir: ./www/
           server-dir: ${{ secrets.FTP_PATH }}
           dangerous-clean-slate: false
+          exclude: |
+            apps/app1/**
+            apps/app2/**

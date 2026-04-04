@@ -1,118 +1,20 @@
 <?php
 /**
- * App Listing Page
- * Scans a directory of projects, lists APK files for download,
- * and renders README.md files as HTML.
+ * Nom : index.php
+ * Description : Page d'accueil listant les applications Android disponibles.
+ * Auteur : O. Booklage
+ * Date : Avril 2026
+ * Licence : MIT
  */
 
 require_once __DIR__ . '/parsedown.php';
+require_once __DIR__ . '/functions.php';
 
-// ── Configuration ──────────────────────────────────────────────
 $appsDir = __DIR__ . '/apps';
 $pageTitle = 'Applications';
-// ───────────────────────────────────────────────────────────────
 
 $parsedown = new Parsedown();
 $parsedown->setSafeMode(true);
-
-/**
- * Scan the apps directory and return structured project data.
- */
-function scanProjects(string $appsDir): array
-{
-    $projects = [];
-    if (!is_dir($appsDir)) {
-        return $projects;
-    }
-
-    // Compute relative path from document root to appsDir
-    $docRoot = rtrim(realpath(__DIR__), '/');
-    $appsReal = rtrim(realpath($appsDir), '/');
-    if ($appsReal === $docRoot) {
-        $relPrefix = '';
-    } else {
-        $relPrefix = ltrim(str_replace($docRoot, '', $appsReal), '/') . '/';
-    }
-
-    $dirs = array_filter(glob($appsDir . '/*'), 'is_dir');
-    sort($dirs);
-
-    foreach ($dirs as $dir) {
-        $name = basename($dir);
-        $apks = glob($dir . '/*.apk');
-        usort($apks, function ($a, $b) {
-            return filemtime($b) - filemtime($a);
-        });
-
-        $apkFiles = [];
-        foreach ($apks as $apk) {
-            $apkFiles[] = [
-                'name'  => basename($apk),
-                'path'  => $relPrefix . $name . '/' . basename($apk),
-                'size'  => filesize($apk),
-                'date'  => filemtime($apk),
-            ];
-        }
-
-        $readme = null;
-        $readmePath = null;
-        $mdFiles = glob($dir . '/*.md');
-        if (!empty($mdFiles)) {
-            $readme = file_get_contents($mdFiles[0]);
-            $readmePath = $relPrefix . $name . '/' . basename($mdFiles[0]);
-        }
-
-        $icon = null;
-        $pngFiles = glob($dir . '/*.png');
-        if (!empty($pngFiles)) {
-            $icon = $relPrefix . $name . '/' . basename($pngFiles[0]);
-        }
-
-        $description = null;
-        if ($readme !== null) {
-            // Extract the first non-empty paragraph after the first heading
-            $lines = preg_split('/\r?\n/', $readme);
-            $pastTitle = false;
-            foreach ($lines as $line) {
-                $trimmed = trim($line);
-                if (!$pastTitle && preg_match('/^#{1,2}\s/', $trimmed)) {
-                    $pastTitle = true;
-                    continue;
-                }
-                if ($pastTitle && $trimmed !== '' && !preg_match('/^#{1,6}\s/', $trimmed)) {
-                    $cleaned = preg_replace('/\*\*(.+?)\*\*/', '$1', $trimmed);
-                    $cleaned = preg_replace('/\*(.+?)\*/', '$1', $cleaned);
-                    $cleaned = preg_replace('/`(.+?)`/', '$1', $cleaned);
-                    $cleaned = preg_replace('/\[([^\]]+)\]\([^)]+\)/', '$1', $cleaned);
-                    $description = $cleaned;
-                    break;
-                }
-            }
-        }
-
-        $projects[] = [
-            'name'        => $name,
-            'apks'        => $apkFiles,
-            'readme'      => $readme,
-            'readmePath'  => $readmePath,
-            'icon'        => $icon,
-            'description' => $description,
-        ];
-    }
-
-    return $projects;
-}
-
-function formatSize(int $bytes): string
-{
-    if ($bytes >= 1048576) {
-        return number_format($bytes / 1048576, 1, ',', ' ') . ' Mo';
-    }
-    if ($bytes >= 1024) {
-        return number_format($bytes / 1024, 0, ',', ' ') . ' Ko';
-    }
-    return $bytes . ' o';
-}
 
 $projects = scanProjects($appsDir);
 ?>
@@ -124,12 +26,7 @@ $projects = scanProjects($appsDir);
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
-    <script>
-        (function() {
-            var t = localStorage.getItem('theme');
-            if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
-        })();
-    </script>
+    <script src="theme-init.js"></script>
     <link rel="stylesheet" href="css/theme.css">
     <link rel="stylesheet" href="css/cosmos.css">
     <link rel="stylesheet" href="css/chrome.css">
@@ -137,10 +34,12 @@ $projects = scanProjects($appsDir);
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <!-- ── Mystic SVG Background ── -->
-    <svg class="bg-cosmos" viewBox="0 0 1000 1000" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+    <!-- ── Arrière-plan SVG animé ── -->
+    <svg class="bg-cosmos"
+         viewBox="0 0 1000 1000"
+         aria-hidden="true"
+         preserveAspectRatio="xMidYMid slice">
         <defs>
-            <!-- Nebula gradients -->
             <radialGradient id="nebula1" cx="20%" cy="30%" r="40%">
                 <stop offset="0%" stop-color="#2a1050" stop-opacity="0.5"/>
                 <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
@@ -153,7 +52,6 @@ $projects = scanProjects($appsDir);
                 <stop offset="0%" stop-color="#1a0a30" stop-opacity="0.35"/>
                 <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
             </radialGradient>
-            <!-- Star glow filter -->
             <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="2" result="blur"/>
                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -161,7 +59,6 @@ $projects = scanProjects($appsDir);
             <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="4"/>
             </filter>
-            <!-- Sacred geometry pattern -->
             <pattern id="sacredGrid" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
                 <line x1="60" y1="0" x2="60" y2="120" stroke="#8b5cf6" stroke-width="0.15" opacity="0.12"/>
                 <line x1="0" y1="60" x2="120" y2="60" stroke="#8b5cf6" stroke-width="0.15" opacity="0.12"/>
@@ -171,15 +68,13 @@ $projects = scanProjects($appsDir);
             </pattern>
         </defs>
 
-        <!-- Sacred geometry grid -->
         <rect width="100%" height="100%" fill="url(#sacredGrid)"/>
 
-        <!-- Nebula clouds -->
         <rect width="100%" height="100%" fill="url(#nebula1)"/>
         <rect width="100%" height="100%" fill="url(#nebula2)"/>
         <rect width="100%" height="100%" fill="url(#nebula3)"/>
 
-        <!-- Animated stars - layer 1: tiny distant -->
+        <!-- Étoiles lointaines -->
         <g class="stars-distant">
             <circle cx="5%" cy="8%" r="0.6" fill="#e8e2f4" opacity="0.5"><animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite"/></circle>
             <circle cx="12%" cy="22%" r="0.4" fill="#d4a844" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="5.2s" repeatCount="indefinite"/></circle>
@@ -201,7 +96,7 @@ $projects = scanProjects($appsDir);
             <circle cx="82%" cy="72%" r="0.6" fill="#d4a844" opacity="0.35"><animate attributeName="opacity" values="0.35;0.08;0.35" dur="5.3s" repeatCount="indefinite"/></circle>
         </g>
 
-        <!-- Animated stars - layer 2: medium bright -->
+        <!-- Étoiles moyennes -->
         <g class="stars-medium" filter="url(#starGlow)">
             <circle cx="10%" cy="15%" r="1" fill="#d4a844" opacity="0.6"><animate attributeName="opacity" values="0.6;0.15;0.6" dur="6s" repeatCount="indefinite"/></circle>
             <circle cx="30%" cy="55%" r="0.9" fill="#8b5cf6" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="7s" repeatCount="indefinite" begin="1s"/></circle>
@@ -213,7 +108,7 @@ $projects = scanProjects($appsDir);
             <circle cx="45%" cy="50%" r="0.8" fill="#d4a844" opacity="0.5"><animate attributeName="opacity" values="0.5;0.12;0.5" dur="5.5s" repeatCount="indefinite" begin="2.5s"/></circle>
         </g>
 
-        <!-- Floating mystic particles - slow drift -->
+        <!-- Particules flottantes -->
         <g class="particles">
             <circle cx="15%" cy="25%" r="1.5" fill="#8b5cf6" opacity="0.04" filter="url(#softGlow)">
                 <animateTransform attributeName="transform" type="translate" values="0,0; 20,-30; -10,10; 0,0" dur="25s" repeatCount="indefinite"/>
@@ -229,20 +124,16 @@ $projects = scanProjects($appsDir);
             </circle>
         </g>
 
-        <!-- Central sigil - sacred geometry -->
+        <!-- Géométrie sacrée centrale -->
         <g class="sigil-main" transform="translate(500, 450)" opacity="0.04">
             <g>
                 <animateTransform attributeName="transform" type="rotate" values="0;360" dur="180s" repeatCount="indefinite"/>
-                <!-- Outer ring -->
                 <circle cx="0" cy="0" r="280" fill="none" stroke="#8b5cf6" stroke-width="0.5"/>
                 <circle cx="0" cy="0" r="260" fill="none" stroke="#d4a844" stroke-width="0.3" stroke-dasharray="4 8"/>
-                <!-- Hexagram -->
                 <polygon points="0,-240 207.8,120 -207.8,120" fill="none" stroke="#d4a844" stroke-width="0.4"/>
                 <polygon points="0,240 207.8,-120 -207.8,-120" fill="none" stroke="#d4a844" stroke-width="0.4"/>
-                <!-- Inner circles -->
                 <circle cx="0" cy="0" r="180" fill="none" stroke="#8b5cf6" stroke-width="0.3"/>
                 <circle cx="0" cy="0" r="100" fill="none" stroke="#d4a844" stroke-width="0.3" stroke-dasharray="2 6"/>
-                <!-- Cardinal points -->
                 <line x1="0" y1="-290" x2="0" y2="290" stroke="#8b5cf6" stroke-width="0.15"/>
                 <line x1="-290" y1="0" x2="290" y2="0" stroke="#8b5cf6" stroke-width="0.15"/>
                 <line x1="-205" y1="-205" x2="205" y2="205" stroke="#d4a844" stroke-width="0.1"/>
@@ -252,7 +143,6 @@ $projects = scanProjects($appsDir);
 
     </svg>
 
-    <!-- Shooting stars canvas -->
     <canvas id="shootingStars"></canvas>
 
     <div class="container">
@@ -267,14 +157,14 @@ $projects = scanProjects($appsDir);
             <h1><span>&#x2726;</span> <?= htmlspecialchars($pageTitle) ?></h1>
             <p>Grimoire des applications Android</p>
             <?php if (!empty($projects)): ?>
-                <span class="project-count"><?= count($projects) ?> sortilège<?= count($projects) > 1 ? 's' : '' ?></span>
+                <span class="project-count"><?= count($projects) ?> application<?= count($projects) > 1 ? 's' : '' ?> magique<?= count($projects) > 1 ? 's' : '' ?> disponible<?= count($projects) > 1 ? 's' : '' ?></span>
             <?php endif; ?>
         </header>
 
         <?php if (empty($projects)): ?>
             <div class="empty">
                 <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
-                <p>Le grimoire est vide... aucun sortilège trouvé.</p>
+                <p>Le grimoire est vide... aucune application trouvée.</p>
             </div>
         <?php else: ?>
             <?php foreach ($projects as $project): ?>
