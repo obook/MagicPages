@@ -32,35 +32,35 @@
     --sigil-opacity: 0.035;
 }
 
-/* ── Light theme — Vieux Grimoire Sépia ── */
+/* ── Light theme — Parchemin clair ── */
 [data-theme="light"] {
-    --bg-deep: #1e1812;
-    --bg-surface: #28211a;
-    --bg-card: #2e261e;
-    --bg-hover: #382f25;
-    --border: #4a3e30;
-    --border-accent: #5e4e3a;
-    --text-primary: #e8dcc8;
-    --text-secondary: #b8a88a;
-    --text-muted: #7a6a52;
-    --gold: #c9952a;
-    --gold-dim: rgba(201, 149, 42, 0.14);
-    --gold-border: rgba(201, 149, 42, 0.35);
-    --gold-glow: rgba(201, 149, 42, 0.10);
-    --violet: #a87edf;
-    --violet-dim: rgba(168, 126, 223, 0.10);
-    --violet-border: rgba(168, 126, 223, 0.25);
-    --violet-glow: rgba(168, 126, 223, 0.06);
-    --emerald: #5cc08a;
-    --emerald-dim: rgba(92, 192, 138, 0.08);
-    --emerald-border: rgba(92, 192, 138, 0.20);
-    --crimson: #d45050;
-    --crimson-glow: rgba(212, 80, 80, 0.10);
-    --card-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    --glow-color: rgba(201, 149, 42, 0.08);
-    --star-opacity: 0.7;
-    --noise-opacity: 0.04;
-    --sigil-opacity: 0.03;
+    --bg-deep: #f4ead7;
+    --bg-surface: #ede0c4;
+    --bg-card: #faf2de;
+    --bg-hover: #e6d8b8;
+    --border: #c9b794;
+    --border-accent: #b8a06b;
+    --text-primary: #2a1f0e;
+    --text-secondary: #5a4730;
+    --text-muted: #8a7553;
+    --gold: #a8761a;
+    --gold-dim: rgba(168, 118, 26, 0.18);
+    --gold-border: rgba(168, 118, 26, 0.45);
+    --gold-glow: rgba(168, 118, 26, 0.15);
+    --violet: #6d3fb5;
+    --violet-dim: rgba(109, 63, 181, 0.10);
+    --violet-border: rgba(109, 63, 181, 0.30);
+    --violet-glow: rgba(109, 63, 181, 0.08);
+    --emerald: #2c8a5e;
+    --emerald-dim: rgba(44, 138, 94, 0.10);
+    --emerald-border: rgba(44, 138, 94, 0.25);
+    --crimson: #b03838;
+    --crimson-glow: rgba(176, 56, 56, 0.10);
+    --card-shadow: 0 4px 30px rgba(60, 40, 20, 0.18);
+    --glow-color: rgba(168, 118, 26, 0.12);
+    --star-opacity: 0.35;
+    --noise-opacity: 0.05;
+    --sigil-opacity: 0.06;
 }
 
 /* ── Base ── */

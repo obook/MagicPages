@@ -76,58 +76,64 @@ $projects = scanProjects($appsDir);
 
         <!-- Étoiles lointaines -->
         <g class="stars-distant">
-            <circle cx="5%" cy="8%" r="0.6" fill="#e8e2f4" opacity="0.5"><animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite"/></circle>
-            <circle cx="12%" cy="22%" r="0.4" fill="#d4a844" opacity="0.4"><animate attributeName="opacity" values="0.4;0.1;0.4" dur="5.2s" repeatCount="indefinite"/></circle>
-            <circle cx="18%" cy="45%" r="0.5" fill="#e8e2f4" opacity="0.35"><animate attributeName="opacity" values="0.35;0.08;0.35" dur="3.8s" repeatCount="indefinite"/></circle>
-            <circle cx="25%" cy="12%" r="0.7" fill="#8b5cf6" opacity="0.4"><animate attributeName="opacity" values="0.4;0.12;0.4" dur="6s" repeatCount="indefinite"/></circle>
-            <circle cx="32%" cy="67%" r="0.4" fill="#e8e2f4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.08;0.3" dur="4.5s" repeatCount="indefinite"/></circle>
-            <circle cx="40%" cy="5%" r="0.5" fill="#d4a844" opacity="0.45"><animate attributeName="opacity" values="0.45;0.1;0.45" dur="5.8s" repeatCount="indefinite"/></circle>
-            <circle cx="48%" cy="35%" r="0.6" fill="#e8e2f4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="7s" repeatCount="indefinite"/></circle>
-            <circle cx="55%" cy="78%" r="0.4" fill="#8b5cf6" opacity="0.35"><animate attributeName="opacity" values="0.35;0.1;0.35" dur="4.2s" repeatCount="indefinite"/></circle>
-            <circle cx="62%" cy="18%" r="0.5" fill="#e8e2f4" opacity="0.4"><animate attributeName="opacity" values="0.4;0.08;0.4" dur="5.5s" repeatCount="indefinite"/></circle>
-            <circle cx="70%" cy="52%" r="0.7" fill="#d4a844" opacity="0.3"><animate attributeName="opacity" values="0.3;0.06;0.3" dur="6.5s" repeatCount="indefinite"/></circle>
-            <circle cx="78%" cy="88%" r="0.4" fill="#e8e2f4" opacity="0.35"><animate attributeName="opacity" values="0.35;0.1;0.35" dur="3.5s" repeatCount="indefinite"/></circle>
-            <circle cx="85%" cy="30%" r="0.5" fill="#8b5cf6" opacity="0.4"><animate attributeName="opacity" values="0.4;0.12;0.4" dur="5s" repeatCount="indefinite"/></circle>
-            <circle cx="92%" cy="60%" r="0.6" fill="#e8e2f4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="4.8s" repeatCount="indefinite"/></circle>
-            <circle cx="95%" cy="15%" r="0.4" fill="#d4a844" opacity="0.45"><animate attributeName="opacity" values="0.45;0.1;0.45" dur="6.2s" repeatCount="indefinite"/></circle>
-            <circle cx="8%" cy="72%" r="0.5" fill="#34d399" opacity="0.25"><animate attributeName="opacity" values="0.25;0.05;0.25" dur="7.5s" repeatCount="indefinite"/></circle>
-            <circle cx="38%" cy="90%" r="0.4" fill="#e8e2f4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.08;0.3" dur="4s" repeatCount="indefinite"/></circle>
-            <circle cx="65%" cy="42%" r="0.5" fill="#34d399" opacity="0.2"><animate attributeName="opacity" values="0.2;0.04;0.2" dur="8s" repeatCount="indefinite"/></circle>
-            <circle cx="82%" cy="72%" r="0.6" fill="#d4a844" opacity="0.35"><animate attributeName="opacity" values="0.35;0.08;0.35" dur="5.3s" repeatCount="indefinite"/></circle>
+            <circle cx="5%" cy="8%" r="0.6" fill="#e8e2f4" opacity="0.5"><!--<animate attributeName="opacity" values="0.5;0.15;0.5" dur="4s" repeatCount="indefinite"/--></circle>
+            <circle cx="12%" cy="22%" r="0.4" fill="#d4a844" opacity="0.4"><!--<animate attributeName="opacity" values="0.4;0.1;0.4" dur="5.2s" repeatCount="indefinite"/--></circle>
+            <circle cx="18%" cy="45%" r="0.5" fill="#e8e2f4" opacity="0.35"><!--<animate attributeName="opacity" values="0.35;0.08;0.35" dur="3.8s" repeatCount="indefinite"/--></circle>
+            <circle cx="25%" cy="12%" r="0.7" fill="#8b5cf6" opacity="0.4"><!--<animate attributeName="opacity" values="0.4;0.12;0.4" dur="6s" repeatCount="indefinite"/--></circle>
+            <circle cx="32%" cy="67%" r="0.4" fill="#e8e2f4" opacity="0.3"><!--<animate attributeName="opacity" values="0.3;0.08;0.3" dur="4.5s" repeatCount="indefinite"/--></circle>
+            <circle cx="40%" cy="5%" r="0.5" fill="#d4a844" opacity="0.45"><!--<animate attributeName="opacity" values="0.45;0.1;0.45" dur="5.8s" repeatCount="indefinite"/--></circle>
+            <circle cx="48%" cy="35%" r="0.6" fill="#e8e2f4" opacity="0.3"><!--<animate attributeName="opacity" values="0.3;0.05;0.3" dur="7s" repeatCount="indefinite"/--></circle>
+            <circle cx="55%" cy="78%" r="0.4" fill="#8b5cf6" opacity="0.35"><!--<animate attributeName="opacity" values="0.35;0.1;0.35" dur="4.2s" repeatCount="indefinite"/--></circle>
+            <circle cx="62%" cy="18%" r="0.5" fill="#e8e2f4" opacity="0.4"><!--<animate attributeName="opacity" values="0.4;0.08;0.4" dur="5.5s" repeatCount="indefinite"/--></circle>
+            <circle cx="70%" cy="52%" r="0.7" fill="#d4a844" opacity="0.3"><!--<animate attributeName="opacity" values="0.3;0.06;0.3" dur="6.5s" repeatCount="indefinite"/--></circle>
+            <circle cx="78%" cy="88%" r="0.4" fill="#e8e2f4" opacity="0.35"><!--<animate attributeName="opacity" values="0.35;0.1;0.35" dur="3.5s" repeatCount="indefinite"/--></circle>
+            <circle cx="85%" cy="30%" r="0.5" fill="#8b5cf6" opacity="0.4"><!--<animate attributeName="opacity" values="0.4;0.12;0.4" dur="5s" repeatCount="indefinite"/--></circle>
+            <circle cx="92%" cy="60%" r="0.6" fill="#e8e2f4" opacity="0.3"><!--<animate attributeName="opacity" values="0.3;0.05;0.3" dur="4.8s" repeatCount="indefinite"/--></circle>
+            <circle cx="95%" cy="15%" r="0.4" fill="#d4a844" opacity="0.45"><!--<animate attributeName="opacity" values="0.45;0.1;0.45" dur="6.2s" repeatCount="indefinite"/--></circle>
+            <circle cx="8%" cy="72%" r="0.5" fill="#34d399" opacity="0.25"><!--<animate attributeName="opacity" values="0.25;0.05;0.25" dur="7.5s" repeatCount="indefinite"/--></circle>
+            <circle cx="38%" cy="90%" r="0.4" fill="#e8e2f4" opacity="0.3"><!--<animate attributeName="opacity" values="0.3;0.08;0.3" dur="4s" repeatCount="indefinite"/--></circle>
+            <circle cx="65%" cy="42%" r="0.5" fill="#34d399" opacity="0.2"><!--<animate attributeName="opacity" values="0.2;0.04;0.2" dur="8s" repeatCount="indefinite"/--></circle>
+            <circle cx="82%" cy="72%" r="0.6" fill="#d4a844" opacity="0.35"><!--<animate attributeName="opacity" values="0.35;0.08;0.35" dur="5.3s" repeatCount="indefinite"/--></circle>
         </g>
 
         <!-- Étoiles moyennes -->
-        <g class="stars-medium" filter="url(#starGlow)">
-            <circle cx="10%" cy="15%" r="1" fill="#d4a844" opacity="0.6"><animate attributeName="opacity" values="0.6;0.15;0.6" dur="6s" repeatCount="indefinite"/></circle>
-            <circle cx="30%" cy="55%" r="0.9" fill="#8b5cf6" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="7s" repeatCount="indefinite" begin="1s"/></circle>
-            <circle cx="50%" cy="20%" r="1.1" fill="#e8e2f4" opacity="0.55"><animate attributeName="opacity" values="0.55;0.12;0.55" dur="5s" repeatCount="indefinite" begin="2s"/></circle>
-            <circle cx="72%" cy="40%" r="0.8" fill="#d4a844" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="8s" repeatCount="indefinite" begin="0.5s"/></circle>
-            <circle cx="88%" cy="75%" r="1" fill="#8b5cf6" opacity="0.45"><animate attributeName="opacity" values="0.45;0.08;0.45" dur="6.5s" repeatCount="indefinite" begin="3s"/></circle>
-            <circle cx="20%" cy="85%" r="0.9" fill="#34d399" opacity="0.35"><animate attributeName="opacity" values="0.35;0.06;0.35" dur="9s" repeatCount="indefinite" begin="1.5s"/></circle>
-            <circle cx="60%" cy="70%" r="1" fill="#e8e2f4" opacity="0.4"><animate attributeName="opacity" values="0.4;0.08;0.4" dur="7.5s" repeatCount="indefinite" begin="4s"/></circle>
-            <circle cx="45%" cy="50%" r="0.8" fill="#d4a844" opacity="0.5"><animate attributeName="opacity" values="0.5;0.12;0.5" dur="5.5s" repeatCount="indefinite" begin="2.5s"/></circle>
+        <!-- filter="url(#starGlow)" retiré : flou Gaussien recalculé chaque frame -->
+        <g class="stars-medium">
+            <circle cx="10%" cy="15%" r="1" fill="#d4a844" opacity="0.6"><!--<animate attributeName="opacity" values="0.6;0.15;0.6" dur="6s" repeatCount="indefinite"/--></circle>
+            <circle cx="30%" cy="55%" r="0.9" fill="#8b5cf6" opacity="0.5"><!--<animate attributeName="opacity" values="0.5;0.1;0.5" dur="7s" repeatCount="indefinite" begin="1s"/--></circle>
+            <circle cx="50%" cy="20%" r="1.1" fill="#e8e2f4" opacity="0.55"><!--<animate attributeName="opacity" values="0.55;0.12;0.55" dur="5s" repeatCount="indefinite" begin="2s"/--></circle>
+            <circle cx="72%" cy="40%" r="0.8" fill="#d4a844" opacity="0.5"><!--<animate attributeName="opacity" values="0.5;0.1;0.5" dur="8s" repeatCount="indefinite" begin="0.5s"/--></circle>
+            <circle cx="88%" cy="75%" r="1" fill="#8b5cf6" opacity="0.45"><!--<animate attributeName="opacity" values="0.45;0.08;0.45" dur="6.5s" repeatCount="indefinite" begin="3s"/--></circle>
+            <circle cx="20%" cy="85%" r="0.9" fill="#34d399" opacity="0.35"><!--<animate attributeName="opacity" values="0.35;0.06;0.35" dur="9s" repeatCount="indefinite" begin="1.5s"/--></circle>
+            <circle cx="60%" cy="70%" r="1" fill="#e8e2f4" opacity="0.4"><!--<animate attributeName="opacity" values="0.4;0.08;0.4" dur="7.5s" repeatCount="indefinite" begin="4s"/--></circle>
+            <circle cx="45%" cy="50%" r="0.8" fill="#d4a844" opacity="0.5"><!--<animate attributeName="opacity" values="0.5;0.12;0.5" dur="5.5s" repeatCount="indefinite" begin="2.5s"/--></circle>
         </g>
 
         <!-- Particules flottantes -->
         <g class="particles">
-            <circle cx="15%" cy="25%" r="1.5" fill="#8b5cf6" opacity="0.04" filter="url(#softGlow)">
-                <animateTransform attributeName="transform" type="translate" values="0,0; 20,-30; -10,10; 0,0" dur="25s" repeatCount="indefinite"/>
+            <circle cx="15%" cy="25%" r="1.5" fill="#8b5cf6" opacity="0.04">
+                <!--<animateTransform attributeName="transform" type="translate" values="0,0; 20,-30; -10,10; 0,0" dur="25s" repeatCount="indefinite"/-->
+
             </circle>
-            <circle cx="75%" cy="20%" r="2" fill="#d4a844" opacity="0.035" filter="url(#softGlow)">
-                <animateTransform attributeName="transform" type="translate" values="0,0; -15,25; 10,-15; 0,0" dur="30s" repeatCount="indefinite"/>
+            <circle cx="75%" cy="20%" r="2" fill="#d4a844" opacity="0.035">
+                <!--<animateTransform attributeName="transform" type="translate" values="0,0; -15,25; 10,-15; 0,0" dur="30s" repeatCount="indefinite"/-->
+
             </circle>
-            <circle cx="40%" cy="70%" r="1.8" fill="#34d399" opacity="0.03" filter="url(#softGlow)">
-                <animateTransform attributeName="transform" type="translate" values="0,0; 25,15; -20,-10; 0,0" dur="22s" repeatCount="indefinite"/>
+            <circle cx="40%" cy="70%" r="1.8" fill="#34d399" opacity="0.03">
+                <!--<animateTransform attributeName="transform" type="translate" values="0,0; 25,15; -20,-10; 0,0" dur="22s" repeatCount="indefinite"/-->
+
             </circle>
-            <circle cx="85%" cy="55%" r="1.5" fill="#8b5cf6" opacity="0.035" filter="url(#softGlow)">
-                <animateTransform attributeName="transform" type="translate" values="0,0; -18,-20; 12,18; 0,0" dur="28s" repeatCount="indefinite"/>
+            <circle cx="85%" cy="55%" r="1.5" fill="#8b5cf6" opacity="0.035">
+                <!--<animateTransform attributeName="transform" type="translate" values="0,0; -18,-20; 12,18; 0,0" dur="28s" repeatCount="indefinite"/-->
+
             </circle>
         </g>
 
         <!-- Géométrie sacrée centrale -->
         <g class="sigil-main" transform="translate(500, 450)" opacity="0.04">
             <g>
-                <animateTransform attributeName="transform" type="rotate" values="0;360" dur="180s" repeatCount="indefinite"/>
+                <!--<animateTransform attributeName="transform" type="rotate" values="0;360" dur="180s" repeatCount="indefinite"/-->
+
                 <circle cx="0" cy="0" r="280" fill="none" stroke="#8b5cf6" stroke-width="0.5"/>
                 <circle cx="0" cy="0" r="260" fill="none" stroke="#d4a844" stroke-width="0.3" stroke-dasharray="4 8"/>
                 <polygon points="0,-240 207.8,120 -207.8,120" fill="none" stroke="#d4a844" stroke-width="0.4"/>

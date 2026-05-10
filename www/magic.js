@@ -11,15 +11,16 @@ function toggleTheme() {
   var estClair = document.documentElement.getAttribute('data-theme') === 'light';
   if (estClair) {
     document.documentElement.removeAttribute('data-theme');
-    localStorage.removeItem('theme');
+    localStorage.setItem('theme', 'dark');
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
+    localStorage.removeItem('theme');
   }
 }
 
-/* ── Étoiles filantes ── */
+/* ── Étoiles filantes (désactivées : économie de CPU) ── */
 (function () {
+  return;
   var canvas = document.getElementById('shootingStars');
   if (!canvas) {
     return;

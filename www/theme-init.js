@@ -10,7 +10,7 @@
  */
 (function () {
   var theme = localStorage.getItem('theme');
-  if (theme === 'light') {
+  if (theme !== 'dark') {
     document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
