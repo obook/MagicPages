@@ -20,7 +20,6 @@ function toggleTheme() {
 
 /* ── Étoiles filantes (désactivées : économie de CPU) ── */
 (function () {
-  return;
   var canvas = document.getElementById('shootingStars');
   if (!canvas) {
     return;
@@ -171,7 +170,9 @@ function toggleTheme() {
     }, delai);
   }
 
+  /* Démarrage désactivé pour économiser le CPU :
   setTimeout(creerEtoile, 1000);
   planifierSuivante();
   dessiner();
+  */
 })();
