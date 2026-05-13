@@ -73,7 +73,6 @@ header p {
     border-radius: 12px;
     margin-bottom: 40px;
     overflow: hidden;
-    animation: materialize 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
     box-shadow: var(--card-shadow);
     transition: box-shadow 0.4s, border-color 0.4s, transform 0.3s;
     position: relative;
@@ -99,27 +98,6 @@ header p {
     border-color: var(--border-accent);
     box-shadow: var(--card-shadow), 0 0 60px var(--violet-glow), 0 0 30px var(--gold-glow);
     transform: translateY(-2px);
-}
-
-.project:nth-child(2) { animation-delay: 0.12s; }
-.project:nth-child(3) { animation-delay: 0.24s; }
-.project:nth-child(4) { animation-delay: 0.36s; }
-.project:nth-child(5) { animation-delay: 0.48s; }
-
-@keyframes materialize {
-    from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.97);
-        filter: blur(4px);
-    }
-    60% {
-        filter: blur(0);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        filter: blur(0);
-    }
 }
 
 .project-header {

@@ -80,12 +80,12 @@ $htmlContent = $parsedown->text($mdContent);
         <rect width="100%" height="100%" fill="url(#nebula1)"/>
         <rect width="100%" height="100%" fill="url(#nebula2)"/>
         <g filter="url(#starGlow)">
-            <circle cx="8%" cy="12%" r="1" fill="#d4a844" opacity="0.5"><animate attributeName="opacity" values="0.5;0.1;0.5" dur="6s" repeatCount="indefinite"/></circle>
-            <circle cx="35%" cy="50%" r="0.9" fill="#8b5cf6" opacity="0.4"><animate attributeName="opacity" values="0.4;0.08;0.4" dur="7s" repeatCount="indefinite"/></circle>
-            <circle cx="55%" cy="25%" r="1" fill="#e8e2f4" opacity="0.45"><animate attributeName="opacity" values="0.45;0.1;0.45" dur="5s" repeatCount="indefinite"/></circle>
-            <circle cx="78%" cy="40%" r="0.8" fill="#d4a844" opacity="0.4"><animate attributeName="opacity" values="0.4;0.08;0.4" dur="8s" repeatCount="indefinite"/></circle>
-            <circle cx="90%" cy="70%" r="1" fill="#8b5cf6" opacity="0.35"><animate attributeName="opacity" values="0.35;0.06;0.35" dur="6.5s" repeatCount="indefinite"/></circle>
-            <circle cx="22%" cy="80%" r="0.9" fill="#34d399" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="9s" repeatCount="indefinite"/></circle>
+            <circle cx="8%" cy="12%" r="1" fill="#d4a844" opacity="0.5"/>
+            <circle cx="35%" cy="50%" r="0.9" fill="#8b5cf6" opacity="0.4"/>
+            <circle cx="55%" cy="25%" r="1" fill="#e8e2f4" opacity="0.45"/>
+            <circle cx="78%" cy="40%" r="0.8" fill="#d4a844" opacity="0.4"/>
+            <circle cx="90%" cy="70%" r="1" fill="#8b5cf6" opacity="0.35"/>
+            <circle cx="22%" cy="80%" r="0.9" fill="#34d399" opacity="0.3"/>
         </g>
     </svg>
 
