@@ -22,7 +22,16 @@ if (session_status() === PHP_SESSION_NONE) {
  */
 function verifierMotDePasse(string $motDePasse): bool
 {
-    $motsDePasse = require __DIR__ . '/secret.php';
+    /*
+     * Charger la liste des mots de passe SI le fichier existe. S'il est
+     * absent (par exemple non encore créé sur le serveur), on n'échoue pas :
+     * seul le code du jour restera accepté, ce qui évite une erreur 500.
+     */
+    $motsDePasse = [];
+    $fichierSecret = __DIR__ . '/secret.php';
+    if (is_file($fichierSecret)) {
+        $motsDePasse = require $fichierSecret;
+    }
 
     /* Code du jour : "dm" donne le jour puis le mois, chacun sur 2 chiffres. */
     $motsDePasse[] = date('dm');
