@@ -113,7 +113,7 @@ $pageTitle = 'Téléchargement protégé';
         <?php else: ?>
             <form class="login-card" method="post" action="download.php" autocomplete="on">
                 <h1><span>&#x2726;</span> Téléchargement</h1>
-                <p class="login-subtitle"><?= htmlspecialchars($file) ?></p>
+                <p class="login-fichier"><?= htmlspecialchars($file) ?></p>
 
                 <label for="motdepasse">Code d'accès</label>
                 <input type="password"

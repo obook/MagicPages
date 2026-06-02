@@ -55,6 +55,18 @@
     letter-spacing: 0.04em;
 }
 
+/* Nom du fichier APK : monospace, plus petit, coupé pour rester dans la carte */
+.login-fichier {
+    margin-top: 8px;
+    margin-bottom: 28px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
 /* Message d'erreur affiché après une tentative ratée */
 .login-erreur {
     margin-bottom: 20px;
