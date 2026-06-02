@@ -1,0 +1,169 @@
+/* ── Page de connexion ── */
+.login-page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Liseré décoratif en haut de la carte, comme les cartes d'applications */
+.login-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--violet) 30%, var(--gold) 50%, var(--violet) 70%, transparent 100%);
+}
+
+.login-card h1 {
+    font-family: 'Cinzel', 'Bitter', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.login-card h1 span {
+    color: var(--gold);
+    text-shadow: 0 0 30px var(--gold-glow);
+}
+
+.login-subtitle {
+    margin-top: 8px;
+    margin-bottom: 28px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+}
+
+/* Message d'erreur affiché après une tentative ratée */
+.login-erreur {
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    background: var(--crimson-glow);
+    border: 1px solid var(--crimson);
+    color: var(--crimson);
+    font-size: 0.9rem;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+}
+
+.login-card input {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: 'Bitter', serif;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: var(--violet-border);
+    box-shadow: 0 0 0 3px var(--violet-glow);
+}
+
+.login-card button {
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px 14px;
+    background: var(--violet-dim);
+    border: 1px solid var(--violet-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: 'Cinzel', 'Bitter', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-card button:hover {
+    background: var(--violet);
+    border-color: var(--violet);
+    box-shadow: 0 0 20px var(--violet-glow), 0 0 40px var(--violet-glow);
+}
+
+/* Bouton de retour à l'accueil affiché après une erreur de mot de passe */
+.bouton-accueil {
+    display: block;
+    margin-top: 24px;
+    padding: 12px 14px;
+    background: var(--violet-dim);
+    border: 1px solid var(--violet-border);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: 'Cinzel', 'Bitter', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.bouton-accueil:hover {
+    background: var(--violet);
+    border-color: var(--violet);
+    box-shadow: 0 0 20px var(--violet-glow), 0 0 40px var(--violet-glow);
+}
+
+/* Bouton secondaire "Accueil" dans le formulaire (action moins prioritaire) */
+.bouton-secondaire {
+    display: block;
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-family: 'Cinzel', 'Bitter', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.bouton-secondaire:hover {
+    color: var(--text-primary);
+    border-color: var(--violet-border);
+    box-shadow: 0 0 18px var(--violet-glow);
+}

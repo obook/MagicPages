@@ -8,7 +8,11 @@
 #
 set -euo pipefail
 
-PORT=8080
+# Le port 8080 est souvent occupé par d'autres services locaux, on prend 8081.
+PORT=8081
+# Adresse d'écoute : on force 127.0.0.1 (IPv4) pour que le navigateur,
+# qui résout "localhost" en IPv4, atteigne bien ce serveur.
+HOTE=127.0.0.1
 
 # Vérifier que PHP est installé
 if ! command -v php &> /dev/null; then
@@ -16,10 +20,10 @@ if ! command -v php &> /dev/null; then
   exit 1
 fi
 
-URL="http://localhost:${PORT}"
+URL="http://${HOTE}:${PORT}"
 echo "Démarrage du serveur PHP sur ${URL}"
 
 # Ouvrir le navigateur par défaut après un court délai
 (sleep 1 && xdg-open "${URL}") &
 
-php -S "localhost:${PORT}" -t www
+php -S "${HOTE}:${PORT}" -t www

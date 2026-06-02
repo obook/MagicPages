@@ -167,6 +167,12 @@ $projects = scanProjects($appsDir);
             <?php endif; ?>
         </header>
 
+        <!-- Bandeau d'information sur le code d'accès -->
+        <div class="bandeau-info">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+            <p>Le téléchargement des applications nécessite un code d'accès</p>
+        </div>
+
         <?php if (empty($projects)): ?>
             <div class="empty">
                 <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
@@ -205,10 +211,14 @@ $projects = scanProjects($appsDir);
                                         <div class="apk-name"><?= htmlspecialchars($apk['name']) ?></div>
                                         <div class="apk-meta"><?= formatSize($apk['size']) ?> &middot; <?= date('d/m/Y H:i', $apk['date']) ?></div>
                                     </div>
-                                    <a class="apk-download" href="<?= htmlspecialchars($apk['path']) ?>" download>
-                                        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-                                        Télécharger
-                                    </a>
+                                    <form class="apk-download-form" method="post" action="download.php">
+                                        <input type="hidden" name="project" value="<?= htmlspecialchars($project['name']) ?>">
+                                        <input type="hidden" name="file" value="<?= htmlspecialchars($apk['name']) ?>">
+                                        <button class="apk-download" type="submit">
+                                            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                            Télécharger
+                                        </button>
+                                    </form>
                                 </div>
                             <?php endforeach; ?>
                         </div>

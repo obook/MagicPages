@@ -259,11 +259,44 @@ header p {
     font-family: 'Inconsolata', monospace;
 }
 
+/* ── Bandeau d'information (code d'accès) ── */
+.bandeau-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding: 16px 22px;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold-border);
+    border-radius: 10px;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.bandeau-info svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--gold);
+    flex-shrink: 0;
+}
+
+.bandeau-info p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Le formulaire ne génère aucune boîte : le bouton prend la place du lien. */
+.apk-download-form {
+    display: contents;
+}
+
 .apk-download {
     display: inline-flex;
     align-items: center;
     gap: 7px;
     padding: 9px 20px;
+    cursor: pointer;
     font-family: 'Inconsolata', monospace;
     font-size: 0.76rem;
     font-weight: 700;
