@@ -33,6 +33,7 @@ function scanProjects(string $appsDir): array
 
         $apkFiles = scanApkFiles($dir, $relPrefix, $name);
         $readmeData = scanReadme($dir, $relPrefix, $name);
+        $shopUrl = scanShopUrl($dir);
 
         $icon = null;
         $pngFiles = glob($dir . '/*.png');
@@ -47,6 +48,7 @@ function scanProjects(string $appsDir): array
             'readmePath'  => $readmeData['path'],
             'icon'        => $icon,
             'description' => $readmeData['description'],
+            'shopUrl'     => $shopUrl,
         ];
     }
 
@@ -84,6 +86,10 @@ function scanReadme(string $dir, string $relPrefix, string $name): array
     $result = ['content' => null, 'path' => null, 'description' => null];
 
     $mdFiles = glob($dir . '/*.md');
+    /* SHOP.md n'est pas de la documentation : il ne contient que l'URL d'achat. */
+    $mdFiles = array_values(array_filter($mdFiles, function ($file) {
+        return strcasecmp(basename($file), 'SHOP.md') !== 0;
+    }));
     if (empty($mdFiles)) {
         return $result;
     }
@@ -93,6 +99,28 @@ function scanReadme(string $dir, string $relPrefix, string $name): array
     $result['description'] = extractDescription($result['content']);
 
     return $result;
+}
+
+/**
+ * Lire l'URL d'achat depuis le fichier SHOP.md d'un dossier, s'il existe.
+ * Renvoie la première ligne contenant une URL http(s), sinon null.
+ */
+function scanShopUrl(string $dir): ?string
+{
+    $shopFile = $dir . '/SHOP.md';
+    if (!is_file($shopFile)) {
+        return null;
+    }
+
+    $lines = preg_split('/\r?\n/', (string) file_get_contents($shopFile));
+    foreach ($lines as $line) {
+        $url = trim($line);
+        if ($url !== '' && preg_match('#^https?://#i', $url)) {
+            return $url;
+        }
+    }
+
+    return null;
 }
 
 /**
