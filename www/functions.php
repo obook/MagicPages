@@ -156,6 +156,18 @@ function extractDescription(?string $markdown): ?string
 }
 
 /**
+ * Calculer le code à 2 chiffres d'une application : le nombre de lettres de
+ * son nom (lettres Unicode uniquement, accents compris ; espaces, chiffres et
+ * ponctuation exclus), ramené sur 2 chiffres. Ce code forme la partie centrale
+ * du code d'accès automatique et est révélé au survol de l'icône.
+ */
+function codeApplication(string $name): string
+{
+    preg_match_all('/\p{L}/u', $name, $lettres);
+    return sprintf('%02d', count($lettres[0]) % 100);
+}
+
+/**
  * Formater une taille en octets en unité lisible (o, Ko, Mo).
  */
 function formatSize(int $bytes): string

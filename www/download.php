@@ -46,17 +46,11 @@ if ($cheminReel === false
 }
 
 /*
- * Déterminer la position de l'application dans la liste, dans le même ordre
- * que la page d'accueil. Cette position (1 pour la première) entre dans le
- * code d'accès automatique.
+ * Code à 2 chiffres de l'application (nombre de lettres de son nom). Il entre
+ * dans le code d'accès automatique et correspond à ce qui est affiché au
+ * survol de l'icône sur la page d'accueil.
  */
-$position = 0;
-foreach (scanProjects($appsDir) as $i => $p) {
-    if ($p['name'] === $project) {
-        $position = $i + 1;
-        break;
-    }
-}
+$codeApp = codeApplication($project);
 
 /* Générer un jeton CSRF s'il n'existe pas encore. */
 if (empty($_SESSION['jeton_csrf'])) {
@@ -81,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['motdepasse'])) {
     if (!hash_equals($_SESSION['jeton_csrf'], $jetonRecu)) {
         /* Jeton absent ou invalide : la session a probablement expiré. */
         $erreur = 'Session expirée, merci de réessayer.';
-    } elseif (verifierMotDePasse($motDePasse, $position)) {
+    } elseif (verifierMotDePasse($motDePasse, $codeApp)) {
         $autorise = true;
     } else {
         $erreur = 'Code d\'accès incorrect.';

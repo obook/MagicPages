@@ -141,40 +141,6 @@ header p {
     object-fit: cover;
 }
 
-/* ── Etiquette "Application NN" revelee au survol de l'icone ── */
-/* Placee sur l'icone (memes left/top/hauteur que .project-icon dans le header),
-   elle s'etend vers la droite pour afficher le texte complet. */
-.project-position {
-    position: absolute;
-    left: 28px;
-    top: 24px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    border-radius: 12px;
-    font-family: 'Inconsolata', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: var(--gold);
-    background: rgba(0, 0, 0, 0.82);
-    border: 1px solid var(--gold-border);
-    opacity: 0;
-    transform: scale(0.96);
-    transform-origin: left center;
-    transition: opacity 0.2s, transform 0.2s;
-    pointer-events: none;
-    z-index: 3;
-}
-
-.project-icon:hover + .project-position {
-    opacity: 1;
-    transform: scale(1);
-}
-
 .project-name {
     font-family: 'Cinzel', 'Bitter', serif;
     font-size: 1.2rem;
@@ -542,7 +508,6 @@ footer::after {
     header { padding: 16px 0 28px; }
     header h1 { font-size: 1.5rem; letter-spacing: 0.04em; }
     .project-header { padding: 18px 18px; flex-wrap: wrap; }
-    .project-position { left: 18px; top: 18px; }
     .doc-link { width: 100%; justify-content: center; }
     .shop-link { width: 100%; justify-content: center; }
     .apk-item { flex-wrap: wrap; gap: 10px; padding: 12px; }

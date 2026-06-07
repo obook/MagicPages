@@ -17,14 +17,15 @@ if (session_status() === PHP_SESSION_NONE) {
 /**
  * Vérifier un mot de passe.
  * Renvoie true si le mot de passe figure dans la liste de secret.php, ou s'il
- * correspond au code automatique de l'application : jour (2 chiffres) +
- * position dans la liste (2 chiffres) + mois (2 chiffres). Par exemple, le
- * 7 juin, la 1re application de la liste a pour code "070106".
+ * correspond au code automatique de l'application : jour (2 chiffres) + code
+ * de l'application (2 chiffres) + mois (2 chiffres). Par exemple, le 7 juin,
+ * une application dont le code vaut "03" a pour code d'accès "070306".
  *
- * $position est le rang de l'application sur la page d'accueil (1 pour la
- * première). Il est calculé par l'appelant à partir du même ordre de tri.
+ * $codeApplication est le code à 2 chiffres de l'application (nombre de lettres
+ * de son nom), calculé par l'appelant via codeApplication() et affiché au
+ * survol de l'icône sur la page d'accueil.
  */
-function verifierMotDePasse(string $motDePasse, int $position): bool
+function verifierMotDePasse(string $motDePasse, string $codeApplication): bool
 {
     /*
      * Charger la liste des mots de passe SI le fichier existe. S'il est
@@ -38,11 +39,11 @@ function verifierMotDePasse(string $motDePasse, int $position): bool
     }
 
     /*
-     * Code automatique propre à chaque application : jour + position + mois,
-     * chacun sur 2 chiffres. La position est celle affichée au survol de
-     * l'icône sur la page d'accueil.
+     * Code automatique propre à chaque application : jour + code de
+     * l'application + mois, chacun sur 2 chiffres. Le code de l'application est
+     * celui affiché au survol de l'icône sur la page d'accueil.
      */
-    $motsDePasse[] = date('d') . sprintf('%02d', $position) . date('m');
+    $motsDePasse[] = date('d') . $codeApplication . date('m');
 
     $valide = false;
     foreach ($motsDePasse as $motAutorise) {
