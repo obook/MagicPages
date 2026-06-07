@@ -67,7 +67,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-    font-family: 'Bitter', 'Crimson Pro', serif;
+    font-family: 'Bitter', serif;
     background: var(--bg-deep);
     color: var(--text-primary);
     min-height: 100vh;
