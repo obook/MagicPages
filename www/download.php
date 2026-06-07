@@ -10,6 +10,7 @@
  */
 
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/functions.php';
 
 $appsDir = __DIR__ . '/apps';
 
@@ -44,6 +45,19 @@ if ($cheminReel === false
     exit('Fichier introuvable.');
 }
 
+/*
+ * Déterminer la position de l'application dans la liste, dans le même ordre
+ * que la page d'accueil. Cette position (1 pour la première) entre dans le
+ * code d'accès automatique.
+ */
+$position = 0;
+foreach (scanProjects($appsDir) as $i => $p) {
+    if ($p['name'] === $project) {
+        $position = $i + 1;
+        break;
+    }
+}
+
 /* Générer un jeton CSRF s'il n'existe pas encore. */
 if (empty($_SESSION['jeton_csrf'])) {
     $_SESSION['jeton_csrf'] = bin2hex(random_bytes(32));
@@ -67,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['motdepasse'])) {
     if (!hash_equals($_SESSION['jeton_csrf'], $jetonRecu)) {
         /* Jeton absent ou invalide : la session a probablement expiré. */
         $erreur = 'Session expirée, merci de réessayer.';
-    } elseif (verifierMotDePasse($motDePasse)) {
+    } elseif (verifierMotDePasse($motDePasse, $position)) {
         $autorise = true;
     } else {
         $erreur = 'Code d\'accès incorrect.';

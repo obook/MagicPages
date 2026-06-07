@@ -179,7 +179,7 @@ $projects = scanProjects($appsDir);
                 <p>Le grimoire est vide... aucune application trouvée.</p>
             </div>
         <?php else: ?>
-            <?php foreach ($projects as $project): ?>
+            <?php foreach ($projects as $index => $project): ?>
                 <div class="project">
                     <div class="project-header">
                         <div class="project-icon">
@@ -189,6 +189,8 @@ $projects = scanProjects($appsDir);
                                 <svg viewBox="0 0 24 24"><path d="M17.6 11.48l1.34-2.32c.07-.12.04-.27-.08-.34s-.27-.04-.34.08l-1.36 2.36C15.78 10.5 14.44 10.12 13 10.12s-2.78.38-4.16 1.14L7.48 8.9c-.07-.12-.22-.15-.34-.08s-.15.22-.08.34l1.34 2.32C5.55 13.01 3.84 15.74 3.5 19h17c-.34-3.26-2.05-5.99-4.9-7.52zM9.5 16.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm5 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
                             <?php endif; ?>
                         </div>
+                        <!-- Revele au survol de l'icone : "Application NN", indice du code d'acces. -->
+                        <span class="project-position" aria-hidden="true">Application <?= sprintf('%02d', $index + 1) ?></span>
                         <span class="project-name"><?= htmlspecialchars($project['name']) ?></span>
                         <?php if ($project['readmePath'] !== null): ?>
                             <a class="doc-link" href="doc.php?project=<?= urlencode($project['name']) ?>">
