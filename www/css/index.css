@@ -517,14 +517,34 @@ footer::after {
 }
 
 /* Statut de la version, à côté du badge APK : démo datée ou version complète */
+.apk-badge-demo,
+.apk-badge-complete {
+    /* Badges pleins : les fonds estompés du thème se ressemblaient trop.
+       Le texte est sombre sur le thème sombre, où violet et or sont clairs,
+       et clair sur le thème parchemin, où ils sont foncés. Les couleurs
+       sont choisies pour dépasser le rapport de contraste 4.5:1 exigé sur
+       un texte de cette taille. */
+    color: #12071c;
+}
+
 .apk-badge-demo {
-    color: var(--violet);
-    background: var(--violet-dim);
-    border-color: var(--violet-border);
+    background: var(--violet);
+    border-color: var(--violet);
 }
 
 .apk-badge-complete {
-    color: var(--gold);
-    background: var(--gold-dim);
-    border-color: var(--gold-border);
+    background: var(--gold);
+    border-color: var(--gold);
+}
+
+[data-theme="light"] .apk-badge-demo,
+[data-theme="light"] .apk-badge-complete {
+    color: #faf2de;
+}
+
+/* L'or du thème clair est trop lumineux pour porter un texte clair : le
+   badge utilise une nuance plus sombre, réservée à cet usage. */
+[data-theme="light"] .apk-badge-complete {
+    background: #8f6414;
+    border-color: #8f6414;
 }
