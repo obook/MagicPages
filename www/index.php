@@ -40,7 +40,7 @@ $nombre = count($projects);
             <p class="contexte">
                 <?= $nombre ?> application<?= $nombre > 1 ? 's' : '' ?> Android de tours de magie.
                 Le téléchargement demande un code d'accès : pour en obtenir un, écrivez à
-                <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>.
+                <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s">olivier.booklage</a>.
             </p>
         </header>
 

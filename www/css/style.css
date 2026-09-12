@@ -190,6 +190,8 @@ a { color: inherit; }
     margin-top: var(--e2);
     max-width: 65ch;
     color: var(--text-muted);
+    /* Une adresse ou une URL n'a aucune espace où se couper. */
+    overflow-wrap: anywhere;
 }
 
 .contexte a {
