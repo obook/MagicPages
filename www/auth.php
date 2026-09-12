@@ -17,13 +17,13 @@ if (session_status() === PHP_SESSION_NONE) {
 /**
  * Vérifier un mot de passe.
  * Renvoie true si le mot de passe figure dans la liste de secret.php, ou s'il
- * correspond au code automatique de l'application : jour (2 chiffres) + code
- * de l'application (2 chiffres) + mois (2 chiffres). Par exemple, le 7 juin,
- * une application dont le code vaut "03" a pour code d'accès "070306".
+ * correspond au code d'accès automatique de l'application.
  *
- * $codeApplication est le code à 2 chiffres de l'application (nombre de lettres
- * de son nom), calculé par l'appelant via codeApplication() et affiché au
- * survol de l'icône sur la page d'accueil.
+ * $codeApplication est le code à 2 chiffres de l'application, calculé par
+ * l'appelant via codeApplication().
+ *
+ * La composition du code automatique et son usage sont décrits dans le dépôt
+ * privé MagicPages-Private.
  */
 function verifierMotDePasse(string $motDePasse, string $codeApplication): bool
 {
@@ -38,11 +38,7 @@ function verifierMotDePasse(string $motDePasse, string $codeApplication): bool
         $motsDePasse = require $fichierSecret;
     }
 
-    /*
-     * Code automatique propre à chaque application : jour + code de
-     * l'application + mois, chacun sur 2 chiffres. Le code de l'application est
-     * celui affiché au survol de l'icône sur la page d'accueil.
-     */
+    /* Code automatique propre à chaque application et au jour courant. */
     $motsDePasse[] = date('d') . $codeApplication . date('m');
 
     $valide = false;
