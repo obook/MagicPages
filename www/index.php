@@ -19,7 +19,7 @@ $nombre = count($projects);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($documentTitle) ?></title>
     <meta name="description" content="Applications Android de tours de magie, à télécharger avec un code d'accès.">
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">

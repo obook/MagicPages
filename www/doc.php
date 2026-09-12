@@ -43,7 +43,7 @@ $htmlContent = $parsedown->text($mdContent);
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><?= htmlspecialchars($project) ?> - La Petite Souris</title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <script src="theme-init.js"></script>

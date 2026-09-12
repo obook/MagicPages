@@ -122,6 +122,10 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
+    /* Supprime le zoom du double appui et le délai de 300 ms qui va avec,
+       sans interdire le pincement. Contrairement au verrou du viewport,
+       cela fonctionne aussi sur iOS. */
+    touch-action: manipulation;
     background: var(--ink);
     color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
