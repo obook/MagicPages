@@ -98,19 +98,16 @@ $pageTitle = 'Téléchargement protégé';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-    <link rel="stylesheet" href="fonts/fonts.css">
-    <script src="theme-init.js"></script>
-    <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login-page">
-        <form class="login-card" method="post" action="download.php" autocomplete="on">
-            <h1><span aria-hidden="true">&#x2726;</span> Téléchargement</h1>
-            <p class="login-fichier"><?= htmlspecialchars($file) ?></p>
+    <div class="acces">
+        <form method="post" action="download.php" autocomplete="on">
+            <h1>Téléchargement</h1>
+            <p class="acces__fichier"><?= htmlspecialchars($file) ?></p>
 
             <?php if ($erreur !== ''): ?>
-                <p class="login-erreur" id="login-erreur" role="alert"><?= htmlspecialchars($erreur) ?></p>
+                <p class="acces__erreur" id="acces-erreur" role="alert"><?= htmlspecialchars($erreur) ?></p>
             <?php endif; ?>
 
             <label for="motdepasse">Code d'accès</label>
@@ -118,7 +115,7 @@ $pageTitle = 'Téléchargement protégé';
                    id="motdepasse"
                    name="motdepasse"
                    autocomplete="one-time-code"
-                   <?= $erreur !== '' ? 'aria-describedby="login-erreur" aria-invalid="true"' : '' ?>
+                   <?= $erreur !== '' ? 'aria-describedby="acces-erreur" aria-invalid="true"' : '' ?>
                    required
                    autofocus>
 
@@ -126,9 +123,10 @@ $pageTitle = 'Téléchargement protégé';
             <input type="hidden" name="file" value="<?= htmlspecialchars($file) ?>">
             <input type="hidden" name="jeton_csrf" value="<?= htmlspecialchars($_SESSION['jeton_csrf']) ?>">
 
-            <button type="submit">Télécharger</button>
-            <a class="bouton-secondaire" href="index.php">Retour à l'accueil</a>
-            <p class="login-contact">
+            <button class="btn btn--primary" type="submit">Télécharger</button>
+            <a class="acces__retour" href="index.php">Retour à l'accueil</a>
+
+            <p class="acces__contact">
                 Pas de code d'accès ?
                 <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>
             </p>
