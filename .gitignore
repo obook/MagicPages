@@ -1,3 +1,6 @@
 # Fichier des identifiants : contient les vrais mots de passe, jamais versionné.
 # Le modèle versionné est www/secret.php.sample (à copier en www/secret.php).
 /www/secret.php
+
+# Identifiants FTP de l'outil de publication, jamais versionnés.
+/compilator/secret.sh
