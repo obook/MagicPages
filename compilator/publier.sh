@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 #
 # Nom : publier.sh
-# Description : Met à jour la date de fin de licence dans le source Kotlin,
-#               recompile l'APK de release et le publie par FTP, pour toutes
-#               les applications déclarées dans apps.conf.
+# Description : Met à jour la date de fin de licence dans le source (Kotlin
+#               ou JavaScript), recompile l'APK et le publie par FTP, pour
+#               toutes les applications déclarées dans apps.conf.
 # Auteur : O. Booklage
 # Date : Septembre 2026
 # Licence : MIT
 #
 # Usage : bash compilator/publier.sh [JJ/MM/AAAA] [application] [--simulation]
-#         Sans date, elle est demandée à l'écran. Sans nom d'application,
-#         toutes celles d'apps.conf sont traitées.
+#         Sans date, elle est demandée à l'écran. 0/0/0 publie une version
+#         sans date limite. Sans nom d'application, toutes celles
+#         d'apps.conf sont traitées.
 #
 set -euo pipefail
 
@@ -20,7 +21,7 @@ FICHIER_APPS="$DOSSIER_OUTIL/apps.conf"
 
 # Variables initialisées ici car le nettoyage de sortie peut s'exécuter
 # avant qu'elles ne soient renseignées.
-fichier_kotlin=""
+fichier_licence=""
 dossier_source=""
 config_curl=""
 readme=""
@@ -34,20 +35,22 @@ titre()  { echo; echo "########## $* ##########"; }
 # passe) disparaît. Appelé après chaque application et à la sortie.
 nettoyer() {
   if [[ -n "$dossier_source" ]]; then
-    for fichier in "$fichier_kotlin" "$readme"; do
+    for fichier in "$fichier_licence" "$readme"; do
       [[ -n "$fichier" ]] \
         && git -C "$dossier_source" checkout -- "$fichier" 2>/dev/null
     done
   fi
-  fichier_kotlin=""
+  fichier_licence=""
   readme=""
   return 0
 }
 trap 'nettoyer; rm -f "$config_curl"' EXIT INT TERM
 
 # Format attendu JJ/MM/AAAA, et date réellement existante : "31/02" est
-# refusé, sans quoi l'APK porterait une date de fin décalée.
+# refusé, sans quoi l'APK porterait une date de fin décalée. "0/0/0" est
+# accepté : il désigne une version sans date limite.
 date_valide() {
+  [[ "$1" == "0/0/0" ]] && return 0
   [[ "$1" =~ ^[0-9]{2}/[0-9]{2}/[0-9]{4}$ ]] || return 1
   local j m a
   IFS='/' read -r j m a <<<"$1"
@@ -63,7 +66,7 @@ application=""
 for argument in "$@"; do
   case "$argument" in
     --simulation) simulation="oui" ;;
-    -h|--help)    sed -n '2,13p' "$0"; exit 0 ;;
+    -h|--help)    sed -n '2,15p' "$0"; exit 0 ;;
     # Un argument au format d'une date est la date limite ; tout autre est
     # le nom d'une application d'apps.conf. Un argument contenant "/" est
     # forcément une date : le signaler plutôt que d'y voir une application.
@@ -82,21 +85,34 @@ if [[ -z "$date_limite" ]]; then
   while true; do
     # "|| true" : sans entrée disponible (fin de fichier), read échoue et
     # set -e interromprait le script sans le moindre message.
-    read -r -p "Date limite d'utilisation (JJ/MM/AAAA, Entrée pour quitter) : " date_limite || true
+    read -r -p "Date limite (JJ/MM/AAAA, 0/0/0 pour illimitée, Entrée pour quitter) : " date_limite || true
     [[ -n "$date_limite" ]] || { echo; echo "Abandon."; exit 0; }
     date_valide "$date_limite" && break
     echo "Date invalide. Format attendu : JJ/MM/AAAA, par exemple 01/02/2027."
   done
 fi
 
-IFS='/' read -r jour mois annee <<<"$date_limite"
-
 # Calendar.MONTH attend le nom anglais du mois ; 10# force la base décimale
 # pour que "08" ne soit pas interprété comme de l'octal.
 MOIS_CALENDAR=(JANUARY FEBRUARY MARCH APRIL MAY JUNE JULY
                AUGUST SEPTEMBER OCTOBER NOVEMBER DECEMBER)
-mois_kotlin="${MOIS_CALENDAR[$((10#$mois - 1))]}"
-jour_kotlin=$((10#$jour))
+
+if [[ "$date_limite" == "0/0/0" ]]; then
+  # Version illimitée. En Kotlin, l'an 9999 sert de sentinelle : la mécanique
+  # de réécriture reste la même, et l'application la reconnaît comme
+  # "pas de date limite". En JavaScript, la sentinelle est "null".
+  illimitee="oui"
+  annee=9999
+  mois_kotlin="DECEMBER"
+  jour_kotlin=31
+  mention="Cette version n'a pas de date limite d'utilisation."
+else
+  illimitee="non"
+  IFS='/' read -r jour mois annee <<<"$date_limite"
+  mois_kotlin="${MOIS_CALENDAR[$((10#$mois - 1))]}"
+  jour_kotlin=$((10#$jour))
+  mention="Cette version de démonstration est utilisable jusqu'au $date_limite."
+fi
 
 # --- Identifiants FTP ------------------------------------------------------
 
@@ -128,8 +144,15 @@ fi
 # --- Traitement d'une application ------------------------------------------
 
 publier_application() {
-  local nom dossier_distant fichier_distant
-  IFS="|" read -r nom dossier_source dossier_distant fichier_distant <<<"$1"
+  local nom dossier_distant fichier_distant commande_build chemin_apk
+  IFS="|" read -r nom dossier_source dossier_distant fichier_distant \
+                  commande_build chemin_apk <<<"$1"
+
+  # Les deux derniers champs sont facultatifs : par défaut, un projet Gradle
+  # ordinaire. Un projet Capacitor, par exemple, compile autrement et dépose
+  # son APK ailleurs.
+  commande_build="${commande_build:-./gradlew assembleRelease}"
+  chemin_apk="${chemin_apk:-app/build/outputs/apk/release/app-release.apk}"
 
   # Chemin relatif : complété par DOSSIER_PROJETS, qui varie d'un poste à
   # l'autre. Chemin absolu : conservé tel quel, pour un dépôt qui ne serait
@@ -138,8 +161,6 @@ publier_application() {
 
   [[ -d "$dossier_source" ]] \
     || erreur "$nom : dépôt introuvable sur ce poste : $dossier_source"
-  [[ -x "$dossier_source/gradlew" ]] \
-    || erreur "$nom : $dossier_source/gradlew introuvable ou non exécutable"
 
   # Mise à jour du dépôt source.
   etape "Mise à jour du dépôt $dossier_source"
@@ -162,21 +183,40 @@ publier_application() {
   # Date de fin de licence.
   etape "Date de fin de licence : $date_limite"
 
-  local motif_date='set\([0-9]{4}, Calendar\.[A-Z]+, [0-9]+, 0, 0, 0\)'
-  fichier_kotlin="$(grep -rlE "$motif_date" --include='*.kt' "$dossier_source/app/src" || true)"
-  [[ -n "$fichier_kotlin" ]] \
-    || erreur "$nom : aucune date de licence trouvée dans les sources Kotlin"
-  [[ "$(wc -l <<<"$fichier_kotlin")" -eq 1 ]] \
-    || erreur "$nom : plusieurs fichiers Kotlin portent une date : $fichier_kotlin"
+  # La date vit dans un objet Kotlin (Licence.kt) ou, pour une application
+  # web empaquetée, dans un module JavaScript (js/licence.js).
+  local motif_kotlin='set\([0-9]{4}, Calendar\.[A-Z]+, [0-9]+, 0, 0, 0\)'
+  local motif_js='^export const EXPIRATION_DATE = .*$'
+  local nouvelle_ligne
 
-  local nouvelle_ligne="set($annee, Calendar.$mois_kotlin, $jour_kotlin, 0, 0, 0)"
-  sed -i -E "s/$motif_date/$nouvelle_ligne/" "$fichier_kotlin"
+  # Recherche limitée aux sources : www/, build/ et assets/public contiennent
+  # des copies générées, qu'il ne faut ni trouver ni modifier.
+  fichier_licence="$(grep -rlE "$motif_kotlin" --include='*.kt' "$dossier_source/app/src" 2>/dev/null || true)"
+  if [[ -n "$fichier_licence" ]]; then
+    [[ "$(wc -l <<<"$fichier_licence")" -eq 1 ]] \
+      || erreur "$nom : plusieurs fichiers Kotlin portent une date : $fichier_licence"
+    nouvelle_ligne="set($annee, Calendar.$mois_kotlin, $jour_kotlin, 0, 0, 0)"
+    sed -i -E "s/$motif_kotlin/$nouvelle_ligne/" "$fichier_licence"
+  else
+    fichier_licence="$dossier_source/js/licence.js"
+    [[ -f "$fichier_licence" ]] \
+      || erreur "$nom : aucune date de licence trouvée (ni Kotlin, ni js/licence.js)"
+    grep -qE "$motif_js" "$fichier_licence" \
+      || erreur "$nom : EXPIRATION_DATE introuvable dans $fichier_licence"
+    # Les mois de Date() partent de 0, d'où le retrait de 1.
+    if [[ "$illimitee" == "oui" ]]; then
+      nouvelle_ligne="export const EXPIRATION_DATE = null;"
+    else
+      nouvelle_ligne="export const EXPIRATION_DATE = new Date($annee, $((10#$mois - 1)), $jour_kotlin);"
+    fi
+    sed -i -E "s|$motif_js|$nouvelle_ligne|" "$fichier_licence"
+  fi
 
   # Relecture : sans elle, une modification silencieusement ratée produirait
   # un APK à l'ancienne date.
-  grep -qF "$nouvelle_ligne" "$fichier_kotlin" \
-    || erreur "$nom : la date n'a pas été écrite dans $fichier_kotlin"
-  echo "$(basename "$fichier_kotlin") : $nouvelle_ligne"
+  grep -qF "$nouvelle_ligne" "$fichier_licence" \
+    || erreur "$nom : la date n'a pas été écrite dans $fichier_licence"
+  echo "$(basename "$fichier_licence") : $nouvelle_ligne"
 
   # doc.php affiche le README.md du dossier distant : la mention de la date
   # limite est ajoutée en fin de fichier, avant l'envoi. Le README du dépôt
@@ -184,12 +224,11 @@ publier_application() {
   readme="$dossier_source/README.md"
   [[ -f "$readme" ]] || erreur "$nom : README.md absent de $dossier_source"
 
-  local mention="Cette version de démonstration est utilisable jusqu'au $date_limite."
   printf '\n---\n\n*%s*\n' "$mention" >> "$readme"
   echo "README.md : $mention"
 
   # Compilation.
-  etape "Compilation de l'APK de release"
+  etape "Compilation : $commande_build"
 
   export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
 
@@ -201,9 +240,9 @@ publier_application() {
     export JAVA_HOME="$HOME/android-studio/jbr"
   fi
 
-  (cd "$dossier_source" && ./gradlew assembleRelease)
+  (cd "$dossier_source" && eval "$commande_build")
 
-  local apk="$dossier_source/app/build/outputs/apk/release/app-release.apk"
+  local apk="$dossier_source/$chemin_apk"
   [[ -f "$apk" ]] || erreur "$nom : APK introuvable après compilation : $apk"
 
   # Copie locale horodatée, pour garder une trace de chaque version publiée.
