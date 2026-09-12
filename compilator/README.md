@@ -49,9 +49,11 @@ calculatirce|calculatirce|Calculatirce|calculatirce_demo.apk
 - `dossier` -- dossier de l'application sur le serveur, sous `FTP_CHEMIN`. Le
   FTP est sensible à la casse : `Calculatirce` et `calculatirce` sont deux
   dossiers distincts ;
-- `fichier` -- nom de l'APK sur le serveur. Il est fixe, sans horodatage :
-  `index.php` liste tous les `.apk` d'un dossier, un nom variable ferait donc
-  s'empiler les versions sur la page.
+- `fichier` -- nom de base de l'APK sur le serveur. Il est fixe, sans
+  horodatage : `index.php` liste tous les `.apk` d'un dossier, un nom variable
+  ferait donc s'empiler les versions sur la page. Le script ajoute `_demo`
+  avant l'extension quand la version publiée porte une date limite, et laisse
+  le nom nu pour une version illimitée.
 
 Les deux derniers champs ne servent qu'aux projets qui ne se compilent pas
 comme un projet Gradle ordinaire :
@@ -64,7 +66,7 @@ comme un projet Gradle ordinaire :
 Une application web empaquetée par Capacitor, par exemple :
 
 ```
-phonedetector|/chemin/phonedetector|phonedetector|phonedetector_demo.apk|npm run cap:sync && cd android && ./gradlew assembleRelease|android/app/build/outputs/apk/release/phonedetector-release.apk
+phonedetector|/chemin/phonedetector|phonedetector|phonedetector.apk|npm run cap:sync && cd android && ./gradlew assembleRelease|android/app/build/outputs/apk/release/phonedetector-release.apk
 ```
 
 Le dépôt doit contenir un `README.md` et porter la date de licence sur une

@@ -154,6 +154,14 @@ publier_application() {
   commande_build="${commande_build:-./gradlew assembleRelease}"
   chemin_apk="${chemin_apk:-app/build/outputs/apk/release/app-release.apk}"
 
+  # apps.conf déclare le nom de base ; le suffixe dit le statut de la version
+  # publiée, qui change d'une publication à l'autre.
+  local suffixe=""
+  if [[ "$illimitee" == "non" ]]; then
+    suffixe="_demo"
+    fichier_distant="${fichier_distant%.apk}_demo.apk"
+  fi
+
   # Chemin relatif : complété par DOSSIER_PROJETS, qui varie d'un poste à
   # l'autre. Chemin absolu : conservé tel quel, pour un dépôt qui ne serait
   # pas rangé avec les autres.
@@ -247,7 +255,7 @@ publier_application() {
 
   # Copie locale horodatée, pour garder une trace de chaque version publiée.
   mkdir -p "$dossier_source/release"
-  local archive="$dossier_source/release/${nom}_$(date '+%d%m%y_%H%M')_demo.apk"
+  local archive="$dossier_source/release/${nom}_$(date '+%d%m%y_%H%M')${suffixe}.apk"
   cp "$apk" "$archive"
   echo "Archive locale : $archive"
 
