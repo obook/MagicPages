@@ -73,13 +73,21 @@
     transform: rotate(15deg);
 }
 
-/* Default dark: show moon, hide sun */
-.theme-toggle .icon-sun { display: none; }
-.theme-toggle .icon-moon { display: block; }
+/*
+ * L'icône annonce la destination, pas l'état courant : en thème sombre on
+ * montre le soleil, puisque c'est ce que le clic donnera.
+ */
+.theme-toggle .icon-sun { display: block; }
+.theme-toggle .icon-moon { display: none; }
 
-/* Light: show sun, hide moon */
-[data-theme="light"] .theme-toggle .icon-sun { display: block; }
-[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+/* Thème clair, qu'il vienne du système ou d'un choix explicite. */
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .theme-toggle .icon-sun { display: none; }
+    :root:not([data-theme="dark"]) .theme-toggle .icon-moon { display: block; }
+}
+
+[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+[data-theme="light"] .theme-toggle .icon-moon { display: block; }
 
 /* Bouton d'achat, commun à la liste et à la page de documentation. */
 /* ── Bouton d'achat (boutique) : bouton plein vert avec reflet animé ── */
