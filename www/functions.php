@@ -75,6 +75,12 @@ function scanApkFiles(string $dir, string $relPrefix, string $name): array
             'path'  => $relPrefix . $name . '/' . basename($apk),
             'size'  => filesize($apk),
             'date'  => filemtime($apk),
+            /*
+             * Une version à durée limitée porte "_demo" avant l'extension,
+             * suffixe posé par l'outil de publication. Les versions sans date
+             * limite gardent leur nom nu.
+             */
+            'demo'  => (bool) preg_match('/_demo\.apk$/i', basename($apk)),
         ];
     }
 
