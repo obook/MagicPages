@@ -167,6 +167,16 @@ function extractDescription(?string $markdown): ?string
         }
 
         if ($pastTitle && $trimmed !== '' && !preg_match('/^#{1,6}\s/', $trimmed)) {
+            /*
+             * Ignorer les lignes d'images : beaucoup de README commencent par
+             * une rangée de badges ou une capture d'écran, dont le texte de
+             * remplacement ("License", "Version"...) ne décrit pas
+             * l'application.
+             */
+            if (preg_replace('/!\[[^\]]*\]\([^)]*\)/', '', $trimmed) === '') {
+                continue;
+            }
+
             $cleaned = preg_replace('/\*\*(.+?)\*\*/', '$1', $trimmed);
             $cleaned = preg_replace('/\*(.+?)\*/', '$1', $cleaned);
             $cleaned = preg_replace('/`(.+?)`/', '$1', $cleaned);
