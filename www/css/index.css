@@ -515,3 +515,16 @@ footer::after {
     .project-description { padding: 14px 16px 16px; font-size: 1.05rem; line-height: 1.75; }
     .project-description::before { display: none; }
 }
+
+/* Statut de la version, à côté du badge APK : démo datée ou version complète */
+.apk-badge-demo {
+    color: var(--violet);
+    background: var(--violet-dim);
+    border-color: var(--violet-border);
+}
+
+.apk-badge-complete {
+    color: var(--gold);
+    background: var(--gold-dim);
+    border-color: var(--gold-border);
+}

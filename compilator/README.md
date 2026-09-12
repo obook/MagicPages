@@ -23,10 +23,10 @@ chmod 600 compilator/secret.sh
 
 Puis renseigner dans `secret.sh` :
 
-- `FTP_SERVEUR`, `FTP_UTILISATEUR`, `FTP_MOTDEPASSE` -- mêmes valeurs que les
+- `FTP_SERVEUR`, `FTP_UTILISATEUR`, `FTP_MOTDEPASSE` : mêmes valeurs que les
   secrets du dépôt GitHub qui déploie le site ;
-- `FTP_CHEMIN` -- dossier `apps` du site sur le serveur, sans slash final ;
-- `DOSSIER_PROJETS` -- dossier contenant les dépôts Android en local. C'est la
+- `FTP_CHEMIN` : dossier `apps` du site sur le serveur, sans slash final ;
+- `DOSSIER_PROJETS` : dossier contenant les dépôts Android en local. C'est la
   seule donnée qui change d'un poste à l'autre, d'où sa place ici plutôt que
   dans `apps.conf`.
 
@@ -40,16 +40,16 @@ plus deux champs facultatifs :
 
 ```
 nom|source|dossier|fichier[|commande|apk]
-calculatirce|calculatirce|Calculatirce|calculatirce_demo.apk
+calculatirce|calculatirce|Calculatirce|calculatirce.apk
 ```
 
-- `nom` -- clé passée en argument à `publier.sh` ;
-- `source` -- dossier du dépôt Android, relatif à `DOSSIER_PROJETS`. Un chemin
+- `nom` : clé passée en argument à `publier.sh` ;
+- `source` : dossier du dépôt Android, relatif à `DOSSIER_PROJETS`. Un chemin
   absolu est accepté pour un dépôt rangé ailleurs ;
-- `dossier` -- dossier de l'application sur le serveur, sous `FTP_CHEMIN`. Le
+- `dossier` : dossier de l'application sur le serveur, sous `FTP_CHEMIN`. Le
   FTP est sensible à la casse : `Calculatirce` et `calculatirce` sont deux
   dossiers distincts ;
-- `fichier` -- nom de base de l'APK sur le serveur. Il est fixe, sans
+- `fichier` : nom de base de l'APK sur le serveur. Il est fixe, sans
   horodatage : `index.php` liste tous les `.apk` d'un dossier, un nom variable
   ferait donc s'empiler les versions sur la page. Le script ajoute `_demo`
   avant l'extension quand la version publiée porte une date limite, et laisse
@@ -58,9 +58,9 @@ calculatirce|calculatirce|Calculatirce|calculatirce_demo.apk
 Les deux derniers champs ne servent qu'aux projets qui ne se compilent pas
 comme un projet Gradle ordinaire :
 
-- `commande` -- commande de compilation, lancée à la racine du dépôt.
+- `commande` : commande de compilation, lancée à la racine du dépôt.
   Défaut : `./gradlew assembleRelease` ;
-- `apk` -- chemin de l'APK produit, relatif au dépôt.
+- `apk` : chemin de l'APK produit, relatif au dépôt.
   Défaut : `app/build/outputs/apk/release/app-release.apk`.
 
 Une application web empaquetée par Capacitor, par exemple :
@@ -113,7 +113,7 @@ les destinations FTP sans rien envoyer.
 6. **Envoi FTP** de l'APK, puis contrôle de la taille distante.
 7. **Envoi FTP du `README.md`** ainsi complété : c'est lui qu'affiche
    `doc.php` sur le site. Puis de `media/icon.png`, l'icône affichée par
-   `index.php` -- si le fichier manque, le script le signale et poursuit.
+   `index.php`. Si le fichier manque, le script le signale et poursuit.
 8. **Retrait des APK précédents** du dossier distant, après affichage de la
    liste et confirmation.
 9. **Restauration** du fichier de licence et du `README.md` dans leur état

@@ -213,6 +213,9 @@ $projects = scanProjects($appsDir);
                             <?php foreach ($project['apks'] as $apk): ?>
                                 <div class="apk-item">
                                     <span class="apk-badge">APK</span>
+                                    <span class="apk-badge <?= $apk['demo'] ? 'apk-badge-demo' : 'apk-badge-complete' ?>">
+                                        <?= $apk['demo'] ? 'Démo' : 'Version complète' ?>
+                                    </span>
                                     <div class="apk-info">
                                         <div class="apk-name"><?= htmlspecialchars($apk['name']) ?></div>
                                         <div class="apk-meta"><?= formatSize($apk['size']) ?> &middot; <?= date('d/m/Y H:i', $apk['date']) ?></div>
