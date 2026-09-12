@@ -6,14 +6,18 @@
  * Licence : MIT
  */
 
-/* ── Basculement de thème ── */
+/*
+ * Le choix est toujours enregistré explicitement, dans un sens comme dans
+ * l'autre : retirer l'attribut rendrait la main au système, et l'utilisateur
+ * qui vient de demander le sombre se retrouverait en clair sur un téléphone
+ * réglé en clair.
+ */
 function toggleTheme() {
-  var estClair = document.documentElement.getAttribute('data-theme') === 'light';
-  if (estClair) {
-    document.documentElement.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'dark');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.removeItem('theme');
-  }
+    var choisi = document.documentElement.getAttribute('data-theme');
+    var estClair = choisi === 'light'
+        || (choisi === null && window.matchMedia('(prefers-color-scheme: light)').matches);
+    var nouveau = estClair ? 'dark' : 'light';
+
+    document.documentElement.setAttribute('data-theme', nouveau);
+    localStorage.setItem('theme', nouveau);
 }

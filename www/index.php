@@ -42,15 +42,15 @@ $projects = scanProjects($appsDir);
          preserveAspectRatio="xMidYMid slice">
         <defs>
             <radialGradient id="nebula1" cx="20%" cy="30%" r="40%">
-                <stop offset="0%" stop-color="#2a1050" stop-opacity="0.5"/>
+                <stop offset="0%" stop-color="var(--nebuleuse-1)" stop-opacity="0.5"/>
                 <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
             </radialGradient>
             <radialGradient id="nebula2" cx="75%" cy="65%" r="35%">
-                <stop offset="0%" stop-color="#0a2a4a" stop-opacity="0.4"/>
+                <stop offset="0%" stop-color="var(--nebuleuse-2)" stop-opacity="0.4"/>
                 <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
             </radialGradient>
             <radialGradient id="nebula3" cx="50%" cy="80%" r="30%">
-                <stop offset="0%" stop-color="#1a0a30" stop-opacity="0.35"/>
+                <stop offset="0%" stop-color="var(--nebuleuse-3)" stop-opacity="0.35"/>
                 <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
             </radialGradient>
             <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">

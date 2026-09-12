@@ -17,3 +17,12 @@
 /* ── Noise texture ──
    Désactivé : feTurbulence en position:fixed+z-index:9999 forçait Firefox à
    recomposer un calque coûteux sur tout l'écran à chaque repaint. */
+
+/* Les étoiles sont peintes en clair dans le SVG, pour le fond nuit. Sur le
+   parchemin, elles disparaissaient : une teinte unique, sombre et discrète,
+   les rend de nouveau visibles. */
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .bg-cosmos circle { fill: var(--etoile); }
+}
+
+[data-theme="light"] .bg-cosmos circle { fill: var(--etoile); }

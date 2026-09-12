@@ -1,16 +1,18 @@
 /*
  * Nom : theme-init.js
- * Description : Appliquer le thème sauvegardé avant le rendu de la page.
+ * Description : Applique le thème choisi avant le premier rendu, pour éviter
+ *               le clignotement d'un thème à l'autre.
  * Auteur : O. Booklage
- * Date : Avril 2026
+ * Date : Septembre 2026
  * Licence : MIT
  *
- * Ce script doit être chargé dans le <head> (sans defer ni async)
- * pour éviter un flash de thème incorrect au chargement.
+ * L'attribut n'est posé que si l'utilisateur a fait un choix. Sans choix, le
+ * CSS décide seul : sombre par défaut, parchemin si le système le demande.
+ * Le rendu est ainsi le même avec et sans JavaScript.
  */
 (function () {
-  var theme = localStorage.getItem('theme');
-  if (theme !== 'dark') {
-    document.documentElement.setAttribute('data-theme', 'light');
-  }
+    var choix = localStorage.getItem('theme');
+    if (choix === 'light' || choix === 'dark') {
+        document.documentElement.setAttribute('data-theme', choix);
+    }
 })();
