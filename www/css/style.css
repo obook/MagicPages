@@ -121,6 +121,12 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/*
+ * Les tailles sont en rem, sur une racine de 16 px : le réglage de taille
+ * de police du navigateur, très utilisé sur Android, agit alors sur tout le
+ * site. L'échelle de la maquette (11, 13, 16, 20...) était en pixels et
+ * commençait trop bas : chaque rôle est monté d'un cran.
+ */
 body {
     /* Supprime le zoom du double appui et le délai de 300 ms qui va avec,
        sans interdire le pincement. Contrairement au verrou du viewport,
@@ -129,7 +135,7 @@ body {
     background: var(--ink);
     color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 13px;
+    font-size: 1rem;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
 }
@@ -155,7 +161,7 @@ a { color: inherit; }
 
 .surtitre {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--accent);
@@ -164,7 +170,7 @@ a { color: inherit; }
 .titre-page {
     margin-top: var(--e2);
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 39px;
+    font-size: 2.4375rem;
     font-weight: 500;
     line-height: 1.2;
 }
@@ -262,7 +268,7 @@ a { color: inherit; }
 
 .app h2 {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 20px;
+    font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.2;
 }
@@ -271,7 +277,7 @@ a { color: inherit; }
     display: inline-block;
     margin-top: var(--e1);
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 0.875rem;
     text-decoration: none;
 }
 
@@ -296,14 +302,14 @@ a { color: inherit; }
 
 .app__meta {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     color: var(--text-faint);
 }
 
 .app__fichier {
     display: block;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     color: var(--text-faint);
     overflow-wrap: anywhere;
 }
@@ -317,7 +323,7 @@ a { color: inherit; }
     margin-top: var(--e1);
     padding: var(--e1) var(--e2);
     border-radius: 4px;
-    font-size: 12px;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 
@@ -333,7 +339,7 @@ a { color: inherit; }
     border: 1px solid transparent;
     border-radius: 8px;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 12px;
+    font-size: 0.875rem;
     font-weight: 500;
     text-decoration: none;
     cursor: pointer;
@@ -347,7 +353,7 @@ a { color: inherit; }
     display: inline-block;
     margin-top: var(--e2);
     color: var(--accent);
-    font-size: 12px;
+    font-size: 0.875rem;
 }
 
 /* ===============================================================
@@ -368,7 +374,7 @@ a { color: inherit; }
 
 .pied p {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     color: var(--text-faint);
     line-height: 1.8;
 }
@@ -391,16 +397,16 @@ a { color: inherit; }
     margin: var(--e6) 0 var(--e3);
 }
 
-.doc h1 { font-size: 31px; }
-.doc h2 { font-size: 25px; }
-.doc h3 { font-size: 20px; }
+.doc h1 { font-size: 1.9375rem; }
+.doc h2 { font-size: 1.5625rem; }
+.doc h3 { font-size: 1.5rem; }
 .doc p, .doc li { margin-bottom: var(--e3); }
 .doc ul, .doc ol { padding-left: var(--e5); }
 .doc a { color: var(--accent); }
 
 .doc code, .doc pre {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 4px;
@@ -461,7 +467,7 @@ a { color: inherit; }
 
 .acces h1 {
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: 25px;
+    font-size: 1.5625rem;
     font-weight: 500;
     line-height: 1.2;
 }
@@ -469,7 +475,7 @@ a { color: inherit; }
 .acces__fichier {
     margin-top: var(--e2);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     color: var(--text-faint);
     overflow-wrap: anywhere;
 }
@@ -486,7 +492,7 @@ a { color: inherit; }
     display: block;
     margin: var(--e5) 0 var(--e2);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 0.8125rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--text-muted);
@@ -501,7 +507,7 @@ a { color: inherit; }
     border-radius: 8px;
     color: var(--text);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
+    font-size: 1.125rem;
     letter-spacing: 0.2em;
     text-align: center;
 }
@@ -513,14 +519,14 @@ a { color: inherit; }
     margin-top: var(--e3);
     text-align: center;
     color: var(--text-muted);
-    font-size: 12px;
+    font-size: 0.875rem;
 }
 
 .acces__contact {
     margin-top: var(--e5);
     text-align: center;
     color: var(--text-faint);
-    font-size: 12px;
+    font-size: 0.875rem;
     overflow-wrap: anywhere;
 }
 
@@ -531,7 +537,7 @@ a { color: inherit; }
  * =============================================================== */
 
 @media (max-width: 640px) {
-    .titre-page { font-size: 31px; }
+    .titre-page { font-size: 1.9375rem; }
 
     .app > footer {
         flex-direction: column;
