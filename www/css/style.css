@@ -127,6 +127,17 @@
  * site. L'échelle de la maquette (11, 13, 16, 20...) était en pixels et
  * commençait trop bas : chaque rôle est monté d'un cran.
  */
+html, body {
+    /*
+     * Sur Firefox Android, le pouce faisait glisser la page latéralement :
+     * un débordement à droite suffit à ouvrir un défilement horizontal, et
+     * le navigateur autorise en plus un débordement élastique. Les deux
+     * sont coupés ici.
+     */
+    overflow-x: hidden;
+    overscroll-behavior-x: none;
+}
+
 body {
     /* Supprime le zoom du double appui et le délai de 300 ms qui va avec,
        sans interdire le pincement. Contrairement au verrou du viewport,
@@ -412,7 +423,7 @@ a { color: inherit; }
     border-radius: 4px;
 }
 
-.doc code { padding: 2px var(--e1); }
+.doc code { padding: 2px var(--e1); overflow-wrap: anywhere; }
 
 .doc pre {
     padding: var(--e3);
@@ -423,15 +434,19 @@ a { color: inherit; }
 .doc pre code { border: none; padding: 0; }
 
 .doc table {
+    display: block;
+    overflow-x: auto;
     border-collapse: collapse;
     margin-bottom: var(--e4);
-    width: 100%;
+    max-width: 100%;
 }
 
 .doc th, .doc td {
     border: 1px solid var(--line);
     padding: var(--e2);
     text-align: left;
+    /* Les liens des tableaux de licences n'ont aucune espace où se couper. */
+    overflow-wrap: anywhere;
 }
 
 .doc img { max-width: 100%; height: auto; }
