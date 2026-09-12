@@ -363,10 +363,25 @@ a { color: inherit; }
 .btn--primary:hover { filter: brightness(1.08); }
 
 .achat {
-    display: inline-block;
-    margin-top: var(--e2);
+    /* Bouton en contour : l'achat est une action, mais l'action principale
+       de la carte reste le téléchargement, seul en aplat. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    min-height: 44px;
+    margin-top: var(--e3);
+    padding: var(--e2) var(--e4);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
     color: var(--accent);
     font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.achat:hover {
+    background: var(--accent-bg);
 }
 
 /* ===============================================================
