@@ -192,6 +192,15 @@ publier_application() {
   etape "Compilation de l'APK de release"
 
   export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+
+  # Le JDK du système est parfois un JRE seul, sans compilateur : Gradle
+  # échoue alors sur "does not provide the required capabilities:
+  # [JAVA_COMPILER]". On préfère donc le JDK d'Android Studio dès qu'il est
+  # présent.
+  if [[ -x "$HOME/android-studio/jbr/bin/javac" ]]; then
+    export JAVA_HOME="$HOME/android-studio/jbr"
+  fi
+
   (cd "$dossier_source" && ./gradlew assembleRelease)
 
   local apk="$dossier_source/app/build/outputs/apk/release/app-release.apk"
