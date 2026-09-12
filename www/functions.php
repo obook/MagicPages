@@ -7,6 +7,9 @@
  * Licence : MIT
  */
 
+/** Adresse de contact proposée à qui n'a pas de code d'accès. */
+const CONTACT_COURRIEL = 'olivier.booklage@lapetitesouris.net';
+
 /**
  * Parcourir le dossier des applications et renvoyer les données structurées.
  */
@@ -79,23 +82,43 @@ function scanApkFiles(string $dir, string $relPrefix, string $name): array
 }
 
 /**
+ * Choisir le fichier de documentation d'un dossier d'application.
+ * README.md est prioritaire : c'est le fichier publié avec l'application.
+ * À défaut, le premier .md par ordre alphabétique. SHOP.md est écarté,
+ * il ne contient que l'URL d'achat.
+ */
+function scanDocFile(string $dir): ?string
+{
+    $mdFiles = array_values(array_filter(glob($dir . '/*.md'), function ($file) {
+        return strcasecmp(basename($file), 'SHOP.md') !== 0;
+    }));
+    if (empty($mdFiles)) {
+        return null;
+    }
+
+    foreach ($mdFiles as $file) {
+        if (strcasecmp(basename($file), 'README.md') === 0) {
+            return $file;
+        }
+    }
+
+    return $mdFiles[0];
+}
+
+/**
  * Lire le README d'un dossier et en extraire le contenu, le chemin et la description.
  */
 function scanReadme(string $dir, string $relPrefix, string $name): array
 {
     $result = ['content' => null, 'path' => null, 'description' => null];
 
-    $mdFiles = glob($dir . '/*.md');
-    /* SHOP.md n'est pas de la documentation : il ne contient que l'URL d'achat. */
-    $mdFiles = array_values(array_filter($mdFiles, function ($file) {
-        return strcasecmp(basename($file), 'SHOP.md') !== 0;
-    }));
-    if (empty($mdFiles)) {
+    $docFile = scanDocFile($dir);
+    if ($docFile === null) {
         return $result;
     }
 
-    $result['content'] = file_get_contents($mdFiles[0]);
-    $result['path'] = $relPrefix . $name . '/' . basename($mdFiles[0]);
+    $result['content'] = file_get_contents($docFile);
+    $result['path'] = $relPrefix . $name . '/' . basename($docFile);
     $result['description'] = extractDescription($result['content']);
 
     return $result;
@@ -156,10 +179,9 @@ function extractDescription(?string $markdown): ?string
 }
 
 /**
- * Calculer le code à 2 chiffres d'une application : le nombre de lettres de
- * son nom (lettres Unicode uniquement, accents compris ; espaces, chiffres et
- * ponctuation exclus), ramené sur 2 chiffres. Ce code forme la partie centrale
- * du code d'accès automatique et est révélé au survol de l'icône.
+ * Calculer le code à 2 chiffres propre à une application, à partir de son nom.
+ * Il entre dans le code d'accès automatique décrit dans le dépôt privé
+ * MagicPages-Private.
  */
 function codeApplication(string $name): string
 {

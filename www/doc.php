@@ -26,19 +26,15 @@ if (!is_dir($projectDir)) {
     exit('Projet non trouvé.');
 }
 
-$mdFiles = glob($projectDir . '/*.md');
-/* SHOP.md n'est pas de la documentation : il ne contient que l'URL d'achat. */
-$mdFiles = array_values(array_filter($mdFiles, function ($file) {
-    return strcasecmp(basename($file), 'SHOP.md') !== 0;
-}));
-if (empty($mdFiles)) {
+$docFile = scanDocFile($projectDir);
+if ($docFile === null) {
     http_response_code(404);
     exit('Aucune documentation trouvée.');
 }
 
 $shopUrl = scanShopUrl($projectDir);
 
-$mdContent = file_get_contents($mdFiles[0]);
+$mdContent = file_get_contents($docFile);
 $parsedown = new Parsedown();
 $parsedown->setSafeMode(true);
 $htmlContent = $parsedown->text($mdContent);

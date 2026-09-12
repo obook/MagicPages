@@ -45,11 +45,7 @@ if ($cheminReel === false
     exit('Fichier introuvable.');
 }
 
-/*
- * Code à 2 chiffres de l'application (nombre de lettres de son nom). Il entre
- * dans le code d'accès automatique et correspond à ce qui est affiché au
- * survol de l'icône sur la page d'accueil.
- */
+/* Code à 2 chiffres de l'application, utilisé par le code d'accès automatique. */
 $codeApp = codeApplication($project);
 
 /* Générer un jeton CSRF s'il n'existe pas encore. */
@@ -117,6 +113,10 @@ $pageTitle = 'Téléchargement protégé';
                 <h1><span>&#x2726;</span> Téléchargement</h1>
                 <p class="login-erreur"><?= htmlspecialchars($erreur) ?></p>
                 <a class="bouton-accueil" href="index.php">Accueil</a>
+                <p class="login-contact">
+                    Pas de code d'accès ?
+                    <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>
+                </p>
             </div>
         <?php else: ?>
             <form class="login-card" method="post" action="download.php" autocomplete="on">
@@ -137,6 +137,10 @@ $pageTitle = 'Téléchargement protégé';
 
                 <button type="submit">Télécharger</button>
                 <a class="bouton-secondaire" href="index.php">Accueil</a>
+                <p class="login-contact">
+                    Pas de code d'accès ?
+                    <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>
+                </p>
             </form>
         <?php endif; ?>
     </div>

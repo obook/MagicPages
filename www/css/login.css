@@ -179,3 +179,22 @@
     border-color: var(--violet-border);
     box-shadow: 0 0 18px var(--violet-glow);
 }
+
+/* Adresse de contact en bas de la carte, pour qui n'a pas de code d'accès */
+.login-contact {
+    margin-top: 24px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    overflow-wrap: anywhere;
+}
+
+.login-contact a {
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.login-contact a:hover {
+    border-bottom-color: var(--gold);
+}
