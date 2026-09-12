@@ -127,6 +127,15 @@
  * site. L'échelle de la maquette (11, 13, 16, 20...) était en pixels et
  * commençait trop bas : chaque rôle est monté d'un cran.
  */
+html {
+    /* Neutralise l'inflation automatique de la taille du texte : elle
+       élargit le contenu au-delà de l'écran sur Firefox Android, alors que
+       nos tailles en rem suivent déjà le réglage du navigateur. */
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 html, body {
     /*
      * Sur Firefox Android, le pouce faisait glisser la page latéralement :
@@ -251,12 +260,13 @@ a { color: inherit; }
 
 .applications {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
     gap: var(--e3);
     list-style: none;
 }
 
 .app {
+    min-width: 0;
     display: flex;
     flex-direction: column;
     background: var(--surface);
@@ -270,6 +280,8 @@ a { color: inherit; }
     align-items: flex-start;
     gap: var(--e3);
 }
+
+.app > header > div { min-width: 0; }
 
 .app img {
     width: 48px;
@@ -314,6 +326,7 @@ a { color: inherit; }
 }
 
 .app__meta {
+    min-width: 0;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8125rem;
     color: var(--text-faint);
