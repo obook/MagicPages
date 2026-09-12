@@ -90,7 +90,7 @@ $nombre = count($projects);
                                         <form method="post" action="download.php">
                                             <input type="hidden" name="project" value="<?= htmlspecialchars($project['name']) ?>">
                                             <input type="hidden" name="file" value="<?= htmlspecialchars($apk['name']) ?>">
-                                            <button class="btn <?= $apk['demo'] ? 'btn--secondary' : 'btn--primary' ?>" type="submit">Télécharger</button>
+                                            <button class="btn btn--primary" type="submit">Télécharger</button>
                                         </form>
                                     </footer>
                                 <?php endif; ?>

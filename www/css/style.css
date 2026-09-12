@@ -343,14 +343,6 @@ a { color: inherit; }
 .btn--primary { background: var(--accent); color: var(--on-accent); }
 .btn--primary:hover { filter: brightness(1.08); }
 
-.btn--secondary {
-    background: transparent;
-    border-color: var(--line-strong);
-    color: var(--text);
-}
-
-.btn--secondary:hover { border-color: var(--accent); color: var(--accent); }
-
 .achat {
     display: inline-block;
     margin-top: var(--e2);
