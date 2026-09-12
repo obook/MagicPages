@@ -265,7 +265,15 @@ a { color: inherit; }
     list-style: none;
 }
 
+/* L'élément de liste s'étire sur la hauteur de la rangée, la carte remplit
+   cet élément : les cartes d'une même rangée s'alignent, et leurs pieds
+   aussi, la description absorbant la différence. */
+.applications > li {
+    display: flex;
+}
+
 .app {
+    flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
