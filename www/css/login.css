@@ -47,14 +47,6 @@
     text-shadow: 0 0 30px var(--gold-glow);
 }
 
-.login-subtitle {
-    margin-top: 8px;
-    margin-bottom: 28px;
-    color: var(--text-secondary);
-    font-size: 1rem;
-    letter-spacing: 0.04em;
-}
-
 /* Nom du fichier APK : monospace, plus petit, coupé pour rester dans la carte */
 .login-fichier {
     margin-top: 8px;
@@ -103,20 +95,21 @@
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.login-card input:focus {
-    outline: none;
+.login-card input:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
     border-color: var(--violet-border);
-    box-shadow: 0 0 0 3px var(--violet-glow);
 }
 
 .login-card button {
     width: 100%;
     margin-top: 6px;
     padding: 12px 14px;
-    background: var(--violet-dim);
-    border: 1px solid var(--violet-border);
+    min-height: 52px;
+    background: var(--violet-fort);
+    border: 1px solid var(--violet-fort);
     border-radius: 8px;
-    color: var(--text-primary);
+    color: #fff;
     font-family: 'Cinzel', 'Bitter', serif;
     font-size: 1rem;
     font-weight: 700;
@@ -127,57 +120,22 @@
 }
 
 .login-card button:hover {
-    background: var(--violet);
-    border-color: var(--violet);
-    box-shadow: 0 0 20px var(--violet-glow), 0 0 40px var(--violet-glow);
+    filter: brightness(1.15);
 }
 
-/* Bouton de retour à l'accueil affiché après une erreur de mot de passe */
-.bouton-accueil {
-    display: block;
-    margin-top: 24px;
-    padding: 12px 14px;
-    background: var(--violet-dim);
-    border: 1px solid var(--violet-border);
-    border-radius: 8px;
-    color: var(--text-primary);
-    font-family: 'Cinzel', 'Bitter', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-}
-
-.bouton-accueil:hover {
-    background: var(--violet);
-    border-color: var(--violet);
-    box-shadow: 0 0 20px var(--violet-glow), 0 0 40px var(--violet-glow);
-}
-
-/* Bouton secondaire "Accueil" dans le formulaire (action moins prioritaire) */
+/* Lien de retour : une action d'abandon ne doit pas ressembler à l'envoi. */
 .bouton-secondaire {
-    display: block;
-    margin-top: 12px;
-    padding: 12px 14px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    display: inline-block;
+    margin-top: 16px;
     color: var(--text-secondary);
-    font-family: 'Cinzel', 'Bitter', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    font-family: 'Bitter', serif;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    transition: color 0.3s;
 }
 
 .bouton-secondaire:hover {
     color: var(--text-primary);
-    border-color: var(--violet-border);
-    box-shadow: 0 0 18px var(--violet-glow);
 }
 
 /* Adresse de contact en bas de la carte, pour qui n'a pas de code d'accès */

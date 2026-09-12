@@ -44,7 +44,7 @@ $htmlContent = $parsedown->text($mdContent);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($project) ?> — Grimoire</title>
+    <title><?= htmlspecialchars($project) ?> - Grimoire</title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
     <script src="theme-init.js"></script>

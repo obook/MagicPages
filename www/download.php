@@ -70,11 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['motdepasse'])) {
 
     if (!hash_equals($_SESSION['jeton_csrf'], $jetonRecu)) {
         /* Jeton absent ou invalide : la session a probablement expiré. */
-        $erreur = 'Session expirée, merci de réessayer.';
+        $erreur = 'Session expirée : rechargez la page depuis l\'accueil.';
     } elseif (verifierMotDePasse($motDePasse, $codeApp)) {
         $autorise = true;
     } else {
-        $erreur = 'Code d\'accès incorrect.';
+        $erreur = 'Code d\'accès incorrect, essayez encore.';
     }
 }
 
@@ -101,48 +101,38 @@ $pageTitle = 'Téléchargement protégé';
     <link rel="stylesheet" href="fonts/fonts.css">
     <script src="theme-init.js"></script>
     <link rel="stylesheet" href="css/theme.css">
-    <link rel="stylesheet" href="css/cosmos.css">
-    <link rel="stylesheet" href="css/chrome.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
     <div class="login-page">
-        <?php if ($erreur !== ''): ?>
-            <!-- Échec de la saisie : message seul et retour à l'accueil. -->
-            <div class="login-card">
-                <h1><span>&#x2726;</span> Téléchargement</h1>
-                <p class="login-erreur"><?= htmlspecialchars($erreur) ?></p>
-                <a class="bouton-accueil" href="index.php">Accueil</a>
-                <p class="login-contact">
-                    Pas de code d'accès ?
-                    <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>
-                </p>
-            </div>
-        <?php else: ?>
-            <form class="login-card" method="post" action="download.php" autocomplete="on">
-                <h1><span>&#x2726;</span> Téléchargement</h1>
-                <p class="login-fichier"><?= htmlspecialchars($file) ?></p>
+        <form class="login-card" method="post" action="download.php" autocomplete="on">
+            <h1><span aria-hidden="true">&#x2726;</span> Téléchargement</h1>
+            <p class="login-fichier"><?= htmlspecialchars($file) ?></p>
 
-                <label for="motdepasse">Code d'accès</label>
-                <input type="password"
-                       id="motdepasse"
-                       name="motdepasse"
-                       autocomplete="current-password"
-                       required
-                       autofocus>
+            <?php if ($erreur !== ''): ?>
+                <p class="login-erreur" id="login-erreur" role="alert"><?= htmlspecialchars($erreur) ?></p>
+            <?php endif; ?>
 
-                <input type="hidden" name="project" value="<?= htmlspecialchars($project) ?>">
-                <input type="hidden" name="file" value="<?= htmlspecialchars($file) ?>">
-                <input type="hidden" name="jeton_csrf" value="<?= htmlspecialchars($_SESSION['jeton_csrf']) ?>">
+            <label for="motdepasse">Code d'accès</label>
+            <input type="password"
+                   id="motdepasse"
+                   name="motdepasse"
+                   autocomplete="one-time-code"
+                   <?= $erreur !== '' ? 'aria-describedby="login-erreur" aria-invalid="true"' : '' ?>
+                   required
+                   autofocus>
 
-                <button type="submit">Télécharger</button>
-                <a class="bouton-secondaire" href="index.php">Accueil</a>
-                <p class="login-contact">
-                    Pas de code d'accès ?
-                    <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>
-                </p>
-            </form>
-        <?php endif; ?>
+            <input type="hidden" name="project" value="<?= htmlspecialchars($project) ?>">
+            <input type="hidden" name="file" value="<?= htmlspecialchars($file) ?>">
+            <input type="hidden" name="jeton_csrf" value="<?= htmlspecialchars($_SESSION['jeton_csrf']) ?>">
+
+            <button type="submit">Télécharger</button>
+            <a class="bouton-secondaire" href="index.php">Retour à l'accueil</a>
+            <p class="login-contact">
+                Pas de code d'accès ?
+                <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>
+            </p>
+        </form>
     </div>
 </body>
 </html>

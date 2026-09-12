@@ -12,6 +12,7 @@ require_once __DIR__ . '/functions.php';
 
 $appsDir = __DIR__ . '/apps';
 $pageTitle = 'Applications';
+$documentTitle = 'Applications magiques - La Petite Souris';
 
 $parsedown = new Parsedown();
 $parsedown->setSafeMode(true);
@@ -23,7 +24,7 @@ $projects = scanProjects($appsDir);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle) ?></title>
+    <title><?= htmlspecialchars($documentTitle) ?></title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
     <script src="theme-init.js"></script>
@@ -149,18 +150,16 @@ $projects = scanProjects($appsDir);
 
     </svg>
 
-    <canvas id="shootingStars"></canvas>
-
     <div class="container">
         <div class="top-bar">
-            <span class="top-bar-title">Les applications magiques de <b>LaPetiteSouris.Net</b></span>
+            <span class="top-bar-title">Les applications magiques de <b>La Petite Souris</b></span>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Changer de thème">
                 <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></svg>
                 <svg class="icon-moon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
             </button>
         </div>
         <header>
-            <h1><span>&#x2726;</span> <?= htmlspecialchars($pageTitle) ?></h1>
+            <h1><span aria-hidden="true">&#x2726;</span> <?= htmlspecialchars($pageTitle) ?></h1>
             <p>Grimoire des applications Android</p>
             <?php if (!empty($projects)): ?>
                 <span class="project-count"><?= count($projects) ?> application<?= count($projects) > 1 ? 's' : '' ?> magique<?= count($projects) > 1 ? 's' : '' ?> disponible<?= count($projects) > 1 ? 's' : '' ?></span>
@@ -170,7 +169,8 @@ $projects = scanProjects($appsDir);
         <!-- Bandeau d'information sur le code d'accès -->
         <div class="bandeau-info">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-            <p>Le téléchargement nécessite un code d'accès</p>
+            <p>Le téléchargement nécessite un code d'accès. Pour en obtenir un,
+               écrivez à <a href="mailto:<?= CONTACT_COURRIEL ?>?subject=Code%20d%27acc%C3%A8s"><?= CONTACT_COURRIEL ?></a>.</p>
         </div>
 
         <?php if (empty($projects)): ?>
@@ -184,12 +184,12 @@ $projects = scanProjects($appsDir);
                     <div class="project-header">
                         <div class="project-icon">
                             <?php if ($project['icon'] !== null): ?>
-                                <img src="<?= htmlspecialchars($project['icon']) ?>" alt="<?= htmlspecialchars($project['name']) ?>">
+                                <img src="<?= htmlspecialchars($project['icon']) ?>" alt="">
                             <?php else: ?>
                                 <svg viewBox="0 0 24 24"><path d="M17.6 11.48l1.34-2.32c.07-.12.04-.27-.08-.34s-.27-.04-.34.08l-1.36 2.36C15.78 10.5 14.44 10.12 13 10.12s-2.78.38-4.16 1.14L7.48 8.9c-.07-.12-.22-.15-.34-.08s-.15.22-.08.34l1.34 2.32C5.55 13.01 3.84 15.74 3.5 19h17c-.34-3.26-2.05-5.99-4.9-7.52zM9.5 16.5c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm5 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg>
                             <?php endif; ?>
                         </div>
-                        <span class="project-name"><?= htmlspecialchars($project['name']) ?></span>
+                        <h2 class="project-name"><?= htmlspecialchars($project['name']) ?></h2>
                         <?php if ($project['readmePath'] !== null): ?>
                             <a class="doc-link" href="doc.php?project=<?= urlencode($project['name']) ?>">
                                 <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
@@ -212,7 +212,6 @@ $projects = scanProjects($appsDir);
                         <div class="apk-list">
                             <?php foreach ($project['apks'] as $apk): ?>
                                 <div class="apk-item">
-                                    <span class="apk-badge">APK</span>
                                     <span class="apk-badge <?= $apk['demo'] ? 'apk-badge-demo' : 'apk-badge-complete' ?>">
                                         <?= $apk['demo'] ? 'Démo' : 'Version complète' ?>
                                     </span>
@@ -246,7 +245,7 @@ $projects = scanProjects($appsDir);
             </div>
             <div class="share-content">
                 <a href="https://android.keosystems.com/magie/" target="_blank" rel="noopener">
-                    <img src="img/qrcode-share.svg" alt="QR Code" class="qrcode">
+                    <img src="img/qrcode-share.svg" alt="QR code vers android.keosystems.com/magie" class="qrcode">
                 </a>
                 <p class="share-url">android.keosystems.com/magie/</p>
             </div>

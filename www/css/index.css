@@ -142,6 +142,9 @@ header p {
 }
 
 .project-name {
+    /* Balise h2 depuis le plan de document : la marge par défaut casserait
+       l'alignement de l'en-tête de carte. */
+    margin: 0;
     font-family: 'Cinzel', 'Bitter', serif;
     font-size: 1.2rem;
     font-weight: 700;
@@ -153,44 +156,31 @@ header p {
 
 /* ── Bouton "Grimoire" : bouton plein or avec reflet animé ── */
 .doc-link {
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     gap: 7px;
     padding: 9px 20px;
     font-family: 'Inconsolata', monospace;
-    font-size: 0.76rem;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.05em;
-    color: #fff;
-    background: linear-gradient(135deg, var(--gold) 0%, #9a6f12 100%);
-    border: none;
+    color: var(--text-primary);
+    background: transparent;
+    border: 1px solid var(--border-accent);
     border-radius: 20px;
     text-decoration: none;
     transition: transform 0.15s, box-shadow 0.3s;
     flex-shrink: 0;
-    box-shadow: 0 4px 16px rgba(212, 168, 68, 0.35);
+    box-shadow: none;
     text-transform: uppercase;
     position: relative;
     overflow: hidden;
 }
 
-.doc-link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.25) 50%, transparent 60%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.doc-link:hover::after {
-    transform: translateX(100%);
-}
-
 .doc-link:hover {
-    box-shadow: 0 6px 28px rgba(212, 168, 68, 0.45), 0 0 12px rgba(212, 168, 68, 0.3);
-    color: #fff;
-    transform: translateY(-1px);
+    border-color: var(--gold-border);
+    color: var(--gold-text);
 }
 
 .doc-link:active {
@@ -203,57 +193,6 @@ header p {
     fill: currentColor;
 }
 
-/* ── Bouton d'achat (boutique) : bouton plein vert avec reflet animé ── */
-.shop-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 20px;
-    font-family: 'Inconsolata', monospace;
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    color: #fff;
-    background: linear-gradient(135deg, var(--emerald) 0%, #059669 100%);
-    border: none;
-    border-radius: 20px;
-    text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.3s;
-    flex-shrink: 0;
-    box-shadow: 0 4px 16px rgba(52, 211, 153, 0.35);
-    text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
-}
-
-.shop-link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.25) 50%, transparent 60%);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.shop-link:hover::after {
-    transform: translateX(100%);
-}
-
-.shop-link:hover {
-    box-shadow: 0 6px 28px rgba(52, 211, 153, 0.45), 0 0 12px rgba(52, 211, 153, 0.3);
-    color: #fff;
-    transform: translateY(-1px);
-}
-
-.shop-link:active {
-    transform: scale(0.97);
-}
-
-.shop-link svg {
-    width: 14px;
-    height: 14px;
-    fill: currentColor;
-}
 
 /* ── Project description ── */
 .project-description {
@@ -300,7 +239,7 @@ header p {
 
 .apk-badge {
     font-family: 'Inconsolata', monospace;
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -318,14 +257,14 @@ header p {
 }
 
 .apk-name {
+    overflow-wrap: anywhere;
     font-size: 0.92rem;
     font-weight: 500;
     color: var(--text-primary);
-    word-break: break-all;
 }
 
 .apk-meta {
-    font-size: 0.76rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
     margin-top: 3px;
     font-family: 'Inconsolata', monospace;
@@ -364,17 +303,18 @@ header p {
 }
 
 .apk-download {
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     gap: 7px;
     padding: 9px 20px;
     cursor: pointer;
     font-family: 'Inconsolata', monospace;
-    font-size: 0.76rem;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     color: #fff;
-    background: linear-gradient(135deg, var(--violet) 0%, #6d3fca 100%);
+    background: var(--violet-fort);
     border: none;
     border-radius: 6px;
     text-decoration: none;
@@ -505,6 +445,14 @@ footer::after {
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
+    /* Le site est surtout consulté sur téléphone : l'en-tête consommait
+       477 px avant la première application, soit plus d'un demi-écran. */
+    header { margin-bottom: 22px; padding-bottom: 18px; }
+    header h1 { font-size: 1.8rem; }
+    header p { font-size: 0.9rem; }
+    .bandeau-info { padding: 12px 14px; margin-bottom: 22px; }
+    .bandeau-info p { font-size: 0.88rem; }
+
     header { padding: 16px 0 28px; }
     header h1 { font-size: 1.5rem; letter-spacing: 0.04em; }
     .project-header { padding: 18px 18px; flex-wrap: wrap; }
@@ -547,4 +495,16 @@ footer::after {
 [data-theme="light"] .apk-badge-complete {
     background: #8f6414;
     border-color: #8f6414;
+}
+
+/* Adresse de contact dans le bandeau : le visiteur sans code doit pouvoir
+   la lire avant de choisir une application, pas après avoir cliqué. */
+.bandeau-info a {
+    color: var(--gold-text);
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+}
+
+.bandeau-info a:hover {
+    color: var(--text-primary);
 }
