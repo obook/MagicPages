@@ -98,6 +98,7 @@ $pageTitle = 'Téléchargement protégé';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+    <script src="theme-init.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>

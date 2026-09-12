@@ -48,7 +48,15 @@
  *  JETONS
  * =============================================================== */
 
-:root {
+/*
+ * Thème sombre : base du site, donc thème par défaut, y compris sans
+ * JavaScript. Le thème clair s'applique si le système le demande ou sur
+ * choix explicite ; ses jetons sont écrits deux fois, faute d'étape de
+ * construction. Toute modification va dans les deux blocs.
+ */
+:root,
+:root[data-theme="dark"] {
+    color-scheme: dark;
     --ink:          #12100E;  /* fond de page */
     --surface:      #1C1917;  /* carte */
     --surface-alt:  #241F1A;  /* badge neutre */
@@ -72,13 +80,46 @@
     --e8: 64px;
 }
 
+
+/* Thème clair : parchemin et laiton assombri, pour garder les mêmes
+   rapports de contraste que sur fond sombre. */
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+        color-scheme: light;
+        --ink:          #F5F0E6;
+        --surface:      #FFFBF2;
+        --surface-alt:  #EDE5D6;
+        --line:         #DED4C0;
+        --line-strong:  #B9AB92;
+        --text:         #1F1B16;
+        --text-muted:   #5C5348;
+        --text-faint:   #6B6155;
+        --accent:       #7A5D0F;
+        --accent-bg:    #F0E6C8;
+        --on-accent:    #FFFBF2;
+    }
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --ink:          #F5F0E6;
+    --surface:      #FFFBF2;
+    --surface-alt:  #EDE5D6;
+    --line:         #DED4C0;
+    --line-strong:  #B9AB92;
+    --text:         #1F1B16;
+    --text-muted:   #5C5348;
+    --text-faint:   #6B6155;
+    --accent:       #7A5D0F;
+    --accent-bg:    #F0E6C8;
+    --on-accent:    #FFFBF2;
+}
+
 /* ===============================================================
  *  BASE
  * =============================================================== */
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { color-scheme: dark; }
 
 body {
     background: var(--ink);
@@ -140,6 +181,46 @@ a { color: inherit; }
     padding-bottom: var(--e5);
     margin-bottom: var(--e5);
 }
+
+/* ===============================================================
+ *  SÉLECTEUR DE THÈME
+ * =============================================================== */
+
+.entete__barre {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--e4);
+}
+
+.theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.theme:hover { border-color: var(--accent); color: var(--accent); }
+.theme svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* L'icône annonce la destination du clic, pas l'état courant. */
+.theme .lune { display: none; }
+.theme .soleil { display: block; }
+
+@media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .theme .soleil { display: none; }
+    :root:not([data-theme="dark"]) .theme .lune { display: block; }
+}
+
+[data-theme="light"] .theme .soleil { display: none; }
+[data-theme="light"] .theme .lune { display: block; }
 
 /* ===============================================================
  *  GRILLE DES APPLICATIONS
