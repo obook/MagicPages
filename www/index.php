@@ -23,8 +23,8 @@ $nombre = count($projects);
     <title><?= htmlspecialchars($documentTitle) ?></title>
     <meta name="description" content="Applications Android de tours de magie, à télécharger avec un code d'accès.">
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-    <script src="theme-init.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="<?= versionne('theme-init.js') ?>"></script>
+    <link rel="stylesheet" href="<?= versionne('css/style.css') ?>">
 </head>
 <body>
     <div class="conteneur">
@@ -111,6 +111,6 @@ $nombre = count($projects);
             </p>
         </footer>
     </div>
-    <script src="theme.js"></script>
+    <script src="<?= versionne('theme.js') ?>"></script>
 </body>
 </html>

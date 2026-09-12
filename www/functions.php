@@ -7,6 +7,24 @@
  * Licence : MIT
  */
 
+/**
+ * Ajouter à un fichier statique un jeton tiré de sa date de modification.
+ *
+ * Le serveur n'envoie ni Cache-Control ni Expires : les navigateurs
+ * appliquent alors leur propre heuristique, et Firefox garde une feuille de
+ * style bien après son remplacement. Le jeton change à chaque déploiement,
+ * ce qui force le rechargement sans rien demander au serveur.
+ */
+function versionne(string $chemin): string
+{
+    $absolu = __DIR__ . '/' . $chemin;
+    if (!is_file($absolu)) {
+        return $chemin;
+    }
+
+    return $chemin . '?v=' . filemtime($absolu);
+}
+
 /** Adresse de contact proposée à qui n'a pas de code d'accès. */
 const CONTACT_COURRIEL = 'olivier.booklage@lapetitesouris.net';
 
