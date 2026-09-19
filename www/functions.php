@@ -28,6 +28,9 @@ function versionne(string $chemin): string
 /** Adresse de contact proposée à qui n'a pas de code d'accès. */
 const CONTACT_COURRIEL = 'olivier.booklage@lapetitesouris.net';
 
+/** Accès libre temporaire aux APK : remettre à false pour exiger de nouveau le code d'accès. */
+const ACCES_LIBRE = true;
+
 /**
  * Parcourir le dossier des applications et renvoyer les données structurées.
  */

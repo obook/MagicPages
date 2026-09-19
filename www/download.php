@@ -54,7 +54,7 @@ if (empty($_SESSION['jeton_csrf'])) {
 }
 
 $erreur = '';
-$autorise = false;
+$autorise = ACCES_LIBRE;
 
 /*
  * Deux POST différents arrivent ici :
