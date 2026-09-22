@@ -197,9 +197,11 @@ publier_application() {
   local motif_js='^export const EXPIRATION_DATE = .*$'
   local nouvelle_ligne
 
-  # Recherche limitée aux sources : www/, build/ et assets/public contiennent
-  # des copies générées, qu'il ne faut ni trouver ni modifier.
-  fichier_licence="$(grep -rlE "$motif_kotlin" --include='*.kt' "$dossier_source/app/src" 2>/dev/null || true)"
+  # Recherche sur tout le dépôt : le projet Android n'est pas toujours à la
+  # racine (MystiScratch vit dans un sous-dossier). Les copies générées de
+  # www/, build/ et assets/public ne portent pas de .kt, et le contrôle qui
+  # suit arrête le script si plusieurs fichiers correspondent.
+  fichier_licence="$(grep -rlE "$motif_kotlin" --include='*.kt' "$dossier_source" 2>/dev/null || true)"
   if [[ -n "$fichier_licence" ]]; then
     [[ "$(wc -l <<<"$fichier_licence")" -eq 1 ]] \
       || erreur "$nom : plusieurs fichiers Kotlin portent une date : $fichier_licence"
